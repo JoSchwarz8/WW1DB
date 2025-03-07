@@ -1,0 +1,16 @@
+
+1) Create a new database in xamp called soldiers_database
+2) Follow the same syntax for the rows VARCHAR 255 for all columns and TEXT for the biography column.
+3) Launch XAMP.
+4) Google and download mysql-connector-java-8.0.11.jar file
+5) Click on services and right click databases and add new. 
+6) Select MySQL(Connector/J driver) and click add
+7) Select the jar file you downloaded in step 4.
+8) Click next.
+9) type in the database you named in step 1.
+10) test the connection and hopefully it says test connection succeeded and click next
+11) click finish.
+12) right click the jdbc:mysql you just created and select properties.
+13) copy the url and put it into the string path you have written in JFrame form.
+
+NOTE: I CREATED A SEPARATE DATBASE BECAUSE WE GET AN ISSUE WITH NOT ABLE TO INSERT NEW DATA INTO CHILD TABLE OF PARENT TABLE WITH THE ORIGINAL WW1_DATABASE I USED.
