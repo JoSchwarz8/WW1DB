@@ -94,6 +94,8 @@ public class Edit {
     Edit edit = new Edit();
 
     public Edit getEdit() {
+        Edit edit = new Edit();
+        
         edit.setSurname(surname);
         edit.setForname(forname);
         edit.setRegiment(regiment);
@@ -109,6 +111,12 @@ public class Edit {
 
     EditDAO editDAO = new EditDAO();
     boolean success = editDAO.Edit(edit);
+
+    if(success){
+        System.out.println("Database row updated successfully");
+}else{
+    System.out.println("Failed to update database");
+}
 
 
 }
