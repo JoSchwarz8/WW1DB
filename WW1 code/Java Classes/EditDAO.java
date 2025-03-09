@@ -12,7 +12,7 @@ override los valores de la DB.
 import java.sql.PreparedStatement;
 
 public class EditDAO {
-    private String DB_URL = "jdbc:mysql://localhost:3306/ww1soldiers";
+    private String DB_URL = "jdbc:mysql://localhost:3000/ww1soldiers";
     private String DB_USER = "root";
     private String DB_PASS = " ";
 
@@ -36,6 +36,8 @@ public class EditDAO {
             stmt.setString(9, edit.getDistrict());
             stmt.setString(10, edit.getPhoto_available());
             stmt.setString(11, edit.getSurname());
+
+            int rowsAffected = stmt.executeUpdate();
 
         }catch (SQLException e){
             return false;
