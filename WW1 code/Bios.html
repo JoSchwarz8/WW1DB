@@ -1,40 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>WW1 Bradford Heroes</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="website header">
-        <img src="">
-        <b>WW1: Bradford Databases</b>
-      </div>
-    </header>
-    <main>
+<head>
+  <meta charset="UTF-8" />
+  <title>Biographies</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #bfbfbf;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #A52A2A;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .search-bar label { font-weight: bold; }
+    .search-bar input[type="text"] {
+      padding: 5px;
+      width: 150px;
+    }
+    .search-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .search-buttons button {
+      background-color: #A52A2A;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .search-buttons button:hover { background-color: #9b3f3f; }
+    .table-container {
+      overflow-y: auto;
+      max-height: 400px;
+      margin: 0 auto;
+      width: 80%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+    thead { background-color: #7a3030; color: #fff; }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    th:first-child, td:first-child { width: 40px; text-align: center; }
+    .footer {
+      width: 80%;
+      margin: 20px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .footer button {
+      background-color: #A52A2A;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .footer button:hover { background-color: #9b3f3f; }
+    .side-buttons {
+      position: absolute;
+      right: 50px;
+      top: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .side-buttons button {
+      background-color: #A52A2A;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .side-buttons button:hover { background-color: #9b3f3f; }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      background-color: #A52A2A;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      width: 150px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .back-link:hover { background-color: #9b3f3f; }
+  </style>
+</head>
+<body>
+<h1>Biographies</h1>
+<div class="search-bar">
+  <label for="forename">Forename:</label>
+  <input type="text" id="forename" name="forename" />
+  <label for="surname">Surname:</label>
+  <input type="text" id="surname" name="surname" />
+</div>
+<div class="search-buttons">
+  <button>Clear fields</button>
+  <button>Search</button>
+</div>
+<div class="table-container">
+  <table id="dataTable">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Surname</th>
+      <th>Forename</th>
+      <th>Regiment</th>
+      <th>Service No</th>
+      <th>Biography attachment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Example row -->
+    <tr>
+      <td><input type="radio" name="rowSelect"></td>
+      <td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer">
+  <div>No of search results</div>
+  <div class="nav-buttons">
+    <button>&lt;</button>
+    <button>&gt;</button>
+  </div>
+</div>
+<a class="back-link" href="dashboard.html">Back to Dashboard</a>
+<script>
+  // JavaScript for row management (Add, Delete, Edit) remains similar to other pages.
+  const tableBody = document.querySelector('#dataTable tbody');
+  const addRowBtn = document.getElementById('addRowBtn');
+  const deleteRowBtn = document.getElementById('deleteRowBtn');
+  const editRowBtn = document.getElementById('editRowBtn');
+  let currentEditingRow = null;
 
-      <span class="database title"><b>Biographies</b></span>
-
-      <div class="search section">
-        <span>Search Criteria</span>
-        <form>
-          <label for="surname">Surname:</label>
-          <input type="text" id="surname" name="surname">
-          <label for="forename">Forename:</label>
-          <input type="text" id="forename" name="forename">
-          <!-- Two buttons, one to search, one to clear form fields -->
-        </form>
-      </div>
-
-      <div class="results"></div>
-
-      <div class="nav buttons"><a href="dashboard.html">Close</a></div> <!-- This container will contain the navigation buttons-->
-      
-    </main>
-    <footer>
-    
-    </footer>
-  </body>
+  // If you need to add row management functionality, add the corresponding JavaScript here.
+</script>
+</body>
 </html>

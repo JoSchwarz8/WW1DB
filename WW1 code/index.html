@@ -1,32 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>WW1 Bradford Heroes</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="website header">
-        <img src="">
-        <b>WW1: Bradford Databases</b>
-      </div>
-    </header>
-    <main>
-      <form>
-        <label for="password">Password: </label>
-        <input type="password" id="password" name="password" required><br>
-        
-        <!-- Two buttons, Login as Guest, and Login as Admin -->
-        <a href="dashboard.html">Login as Guest</a>  <!-- Replace this link with button-->
-        <a href="dashboard.html">Login as Administrator</a>  <!-- Replace this link with button-->
+<head>
+  <meta charset="UTF-8">
+  <title>Bradford WWI Group Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+<div class="container">
+  <!-- Top-left welcome text -->
+  <h1 class="welcome">Welcome</h1>
 
-      </form>
-      
-    </main>
-    <footer>
-    
-    </footer>
-  </body>
+  <!-- Top-right logo/title -->
+  <div class="logo">
+    <h2>Bradford<br>WWI<br>Group</h2>
+  </div>
+
+  <!-- Administrators login box -->
+  <div class="admin-box">
+    <h3>Administrators</h3>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <!-- The error message is hidden by default -->
+      <p class="error">Incorrect password, please try again</p>
+
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+
+  <!-- The "or" text in the middle -->
+  <div class="or">or</div>
+
+  <!-- Guest login box -->
+  <div class="guest-box">
+    <button type="button">Log in as Guest</button>
+  </div>
+</div>
+
+<!-- JavaScript for form validation -->
+<script>
+  const form = document.getElementById('loginForm');
+  const errorMsg = document.querySelector('.error');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from submitting by default
+
+    // Get the value of the password field
+    const password = document.getElementById('password').value;
+
+    // Define your correct password (for demonstration purposes, "secret" is used)
+    const correctPassword = 'secret';
+
+    // Check if password is empty or incorrect
+    if (!password || password !== correctPassword) {
+      errorMsg.style.display = 'block'; // Show the error message
+    } else {
+      errorMsg.style.display = 'none'; // Hide the error message if the password is correct
+      // Continue with login actions, e.g., redirect to the dashboard
+      window.location.href = "dashboard.html";
+    }
+  });
+</script>
+</body>
 </html>

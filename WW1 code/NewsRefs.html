@@ -1,40 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>WW1 Bradford Heroes</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="website header">
-        <img src="">
-        <b>WW1: Bradford Databases</b>
-      </div>
-    </header>
-    <main>
+<head>
+  <meta charset="UTF-8" />
+  <title>Newspaper index</title>
+  <style>
+    /* Overall page styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #a9a9a9; /* Gray background */
+    }
+    .container {
+      width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #d3d3d3;
+      border: 1px solid #999;
+      position: relative;
+    }
 
-      <span class="database title"><b>Newspaper Index</b></span>
+    /* Page heading */
+    h1 {
+      text-align: center;
+      color: #800000; /* Maroon text */
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
 
-      <div class="search section">
-        <span>Search Criteria</span>
-        <form>
-          <label for="surname">Surname:</label>
-          <input type="text" id="surname" name="surname">
-          <label for="forename">Forename:</label>
-          <input type="text" id="forename" name="forename">
-          <!-- Two buttons, one to search, one to clear form fields -->
-        </form>
-      </div>
+    /* Top row: Forename, Surname, Clear fields, Search */
+    .search-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .search-row label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    .search-row input[type="text"] {
+      margin-right: 10px;
+      padding: 5px;
+      width: 150px;
+      border: 1px solid #999;
+    }
+    .top-buttons {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .top-buttons button {
+      padding: 6px 12px;
+      background-color: #800000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
 
-      <div class="results"></div>
+    /* Table and side-buttons container */
+    .table-section {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .table-wrapper {
+      flex: 1;
+      overflow: auto;
+      max-height: 400px;
+      margin-right: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 800px; /* Force horizontal scroll if container is narrow */
+      background-color: #fff;
+    }
+    thead {
+      background-color: #800000;
+      color: #fff;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #999;
+      white-space: nowrap;
+    }
+    /* Radio column is narrower */
+    .radio-cell {
+      text-align: center;
+      width: 40px;
+    }
 
-      <div class="nav buttons"><a href="dashboard.html">Close</a></div> <!-- This container will contain the navigation buttons-->
-      
-    </main>
-    <footer>
-    
-    </footer>
-  </body>
+    /* Right‐side buttons: Add, Delete, Edit */
+    .side-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .side-buttons button {
+      padding: 6px 12px;
+      background-color: #800000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Bottom row: search results and nav buttons */
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bottom-row .search-results {
+      font-weight: bold;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .nav-buttons button {
+      background-color: #800000;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Newspaper index</h1>
+
+  <!-- Top row: Forename, Surname, Clear fields, Search -->
+  <div class="search-row">
+    <label for="forename">Forename:</label>
+    <input type="text" id="forename" />
+    <label for="surname">Surname:</label>
+    <input type="text" id="surname" />
+    <div class="top-buttons">
+      <button type="button" id="clearBtn">Clear fields</button>
+      <button type="button" id="searchBtn">Search</button>
+    </div>
+  </div>
+
+  <!-- Middle: table and side buttons -->
+  <div class="table-section">
+    <div class="table-wrapper">
+      <table id="dataTable">
+        <thead>
+        <tr>
+          <th></th> <!-- Radio column -->
+          <th>Surname</th>
+          <th>Forename</th>
+          <th>Rank</th>
+          <th>Address</th>
+          <th>Regiment</th>
+          <th>Unit</th>
+          <th>Article Comment</th>
+          <th>Newspaper Name</th>
+          <th>Newspaper Date</th>
+          <th>Page/Col</th>
+          <th>Photo incl</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Example row -->
+        <tr>
+          <td class="radio-cell"><input type="radio" name="selectRow"></td>
+          <td></td> <td></td> <td></td> <td></td> <td></td>
+          <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="side-buttons">
+      <button type="button" id="addRowBtn">Add Row</button>
+      <button type="button" id="deleteRowBtn">Delete Row</button>
+      <button type="button" id="editRowBtn">Edit Row</button>
+    </div>
+  </div>
+
+  <!-- Bottom row: number of search results, nav buttons -->
+  <div class="bottom-row">
+    <div class="search-results">No of search results: <span id="resultsCount">0</span></div>
+    <div class="nav-buttons">
+      <button type="button" id="prevBtn">&larr;</button>
+      <button type="button" id="nextBtn">&rarr;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // References to table body and side buttons
+  const tableBody = document.querySelector('#dataTable tbody');
+  const addRowBtn = document.getElementById('addRowBtn');
+  const deleteRowBtn = document.getElementById('deleteRowBtn');
+  const editRowBtn = document.getElementById('editRowBtn');
+  let currentEditingRow = null;
+
+  // Add a new row
+  addRowBtn.addEventListener('click', () => {
+    const newRow = document.createElement('tr');
+
+    // First cell: radio button
+    const radioCell = document.createElement('td');
+    radioCell.className = 'radio-cell';
+    radioCell.innerHTML = '<input type="radio" name="selectRow">';
+    newRow.appendChild(radioCell);
+
+    // We have 11 more columns: Surname, Forename, Rank, Address, Regiment,
+    // Unit, Article Comment, Newspaper Name, Newspaper Date, Page/Col, Photo incl
+    for (let i = 0; i < 11; i++) {
+      const cell = document.createElement('td');
+      cell.textContent = '';
+      newRow.appendChild(cell);
+    }
+    tableBody.appendChild(newRow);
+  });
+
+  // Delete selected row
+  deleteRowBtn.addEventListener('click', () => {
+    const selectedRadio = document.querySelector('input[type="radio"][name="selectRow"]:checked');
+    if (selectedRadio) {
+      const row = selectedRadio.closest('tr');
+      // If currently editing this row, exit edit mode
+      if (currentEditingRow === row) {
+        currentEditingRow = null;
+        editRowBtn.textContent = "Edit Row";
+      }
+      row.remove();
+    } else {
+      alert('Please select a row to delete.');
+    }
+  });
+
+  // Toggle edit mode on the selected row
+  editRowBtn.addEventListener('click', () => {
+    const selectedRadio = document.querySelector('input[type="radio"][name="selectRow"]:checked');
+    if (!selectedRadio) {
+      alert('Please select a row to edit.');
+      return;
+    }
+    const row = selectedRadio.closest('tr');
+
+    if (currentEditingRow === row) {
+      // Save changes: disable contentEditable
+      Array.from(row.cells).forEach((cell, index) => {
+        // Skip radio cell
+        if (index > 0) {
+          cell.contentEditable = false;
+          cell.style.backgroundColor = "";
+        }
+      });
+      editRowBtn.textContent = "Edit Row";
+      currentEditingRow = null;
+    } else {
+      // If another row is in edit mode, disable it first
+      if (currentEditingRow) {
+        Array.from(currentEditingRow.cells).forEach((cell, index) => {
+          if (index > 0) {
+            cell.contentEditable = false;
+            cell.style.backgroundColor = "";
+          }
+        });
+      }
+      // Enable editing for the newly selected row
+      Array.from(row.cells).forEach((cell, index) => {
+        // Skip radio cell
+        if (index > 0) {
+          cell.contentEditable = true;
+          cell.style.backgroundColor = "#ffffe0"; // Light yellow
+        }
+      });
+      editRowBtn.textContent = "Save Row";
+      currentEditingRow = row;
+    }
+  });
+
+  // Stub out “Clear fields” and “Search” functionality
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    document.getElementById('forename').value = '';
+    document.getElementById('surname').value = '';
+  });
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    alert('Search functionality not implemented.');
+  });
+
+  // Stub out Prev/Next nav
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    alert('Previous page not implemented.');
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    alert('Next page not implemented.');
+  });
+</script>
+</body>
 </html>

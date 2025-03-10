@@ -1,40 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>WW1 Bradford Heroes</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="website header">
-        <img src="">
-        <b>WW1: Bradford Databases</b>
-      </div>
-    </header>
-    <main>
+<head>
+  <meta charset="UTF-8" />
+  <title>Bradford Memorials</title>
+  <style>
+    /* Base styling to fill the whole viewport */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #c4c4c4;
+    }
+    /* Container now fills the entire screen */
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      background-color: #d3d3d3;
+      border: 1px solid #999;
+    }
+    h1 {
+      text-align: center;
+      color: #A52A2A;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    .search-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .search-section label {
+      font-weight: bold;
+    }
+    .search-section input[type="text"] {
+      padding: 5px;
+      width: 150px;
+      border: 1px solid #999;
+    }
+    .search-section button {
+      padding: 6px 12px;
+      background-color: #A52A2A;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    /* Table-section now grows to fill available space */
+    .table-section {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .table-wrapper {
+      flex: 1;
+      overflow: auto;
+      background-color: #fff;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+    }
+    thead {
+      background-color: #A52A2A;
+      color: #fff;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #999;
+      white-space: nowrap;
+    }
+    .radio-cell {
+      text-align: center;
+      width: 40px;
+    }
+    /* Side buttons: fixed width, fills available height, and scrollable */
+    .side-buttons {
+      width: 150px;
+      max-height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .bottom-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .results-info {
+      font-weight: bold;
+    }
+    .back-button {
+      background-color: #A52A2A;
+      color: #fff;
+      padding: 6px 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Bradford Memorials</h1>
+  <div class="search-section">
+    <label for="forename">Forename:</label>
+    <input type="text" id="forename" name="forename" />
+    <label for="surname">Surname:</label>
+    <input type="text" id="surname" name="surname" />
+    <button type="button">Clear fields</button>
+    <button type="button">Search</button>
+  </div>
+  <div class="table-section">
+    <div class="table-wrapper">
+      <table id="dataTable">
+        <thead>
+        <tr>
+          <!-- First column for radio button selection -->
+          <th></th>
+          <!-- New headings -->
+          <th>Surname</th>
+          <th>Forename</th>
+          <th>Regiment</th>
+          <th>Unit</th>
+          <th>Memorial</th>
+          <th>Memorial location</th>
+          <th>Memorial info</th>
+          <th>Memorial Postcode</th>
+          <th>District</th>
+          <th>Photo available</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Example row with 11 cells total (1 for radio, 10 for data) -->
+        <tr>
+          <td class="radio-cell"><input type="radio" name="selectRow"></td>
+          <td></td> <!-- Surname -->
+          <td></td> <!-- Forename -->
+          <td></td> <!-- Regiment -->
+          <td></td> <!-- Unit -->
+          <td></td> <!-- Memorial -->
+          <td></td> <!-- Memorial location -->
+          <td></td> <!-- Memorial info -->
+          <td></td> <!-- Memorial Postcode -->
+          <td></td> <!-- District -->
+          <td></td> <!-- Photo available -->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="side-buttons">
+      <button type="button" id="addRowBtn">Add Row</button>
+      <button type="button" id="deleteRowBtn">Delete Row</button>
+      <button type="button" id="editRowBtn">Edit Row</button>
+      <button type="button" id="importBtn">Import</button>
+      <button type="button" id="exportBtn">Export</button>
+    </div>
+  </div>
+  <div class="bottom-section">
+    <div class="results-info">No of search results: 0</div>
+    <a class="back-button" href="dashboard.html">Back</a>
+  </div>
+</div>
+<script>
+  const tableBody = document.querySelector('#dataTable tbody');
+  const addRowBtn = document.getElementById('addRowBtn');
+  const deleteRowBtn = document.getElementById('deleteRowBtn');
+  const editRowBtn = document.getElementById('editRowBtn');
+  let currentEditingRow = null;
 
-      <span class="database title"><b>Bradford Memorials</b></span>
+  addRowBtn.addEventListener('click', () => {
+    // Create a new row with 11 cells (1 radio + 10 data cells)
+    const newRow = document.createElement('tr');
 
-      <div class="search section">
-        <span>Search Criteria</span>
-        <form>
-          <label for="surname">Surname:</label>
-          <input type="text" id="surname" name="surname">
-          <label for="forename">Forename:</label>
-          <input type="text" id="forename" name="forename">
-          <!-- Two buttons, one to search, one to clear form fields -->
-        </form>
-      </div>
+    let cell = document.createElement('td');
+    cell.className = 'radio-cell';
+    let radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'selectRow';
+    cell.appendChild(radio);
+    newRow.appendChild(cell);
 
-      <div class="results"></div>
+    // Create 10 empty cells for the headings
+    for (let i = 0; i < 10; i++) {
+      let newCell = document.createElement('td');
+      newCell.textContent = '';
+      newRow.appendChild(newCell);
+    }
+    tableBody.appendChild(newRow);
+  });
 
-      <div class="nav buttons"><a href="dashboard.html">Close</a></div> <!-- This container will contain the navigation buttons-->
-      
-    </main>
-    <footer>
-    
-    </footer>
-  </body>
+  deleteRowBtn.addEventListener('click', () => {
+    const selectedRadio = document.querySelector('input[type="radio"][name="selectRow"]:checked');
+    if (selectedRadio) {
+      const row = selectedRadio.closest('tr');
+      if (currentEditingRow === row) {
+        currentEditingRow = null;
+        editRowBtn.textContent = "Edit Row";
+      }
+      row.remove();
+    } else {
+      alert('Please select a row to delete.');
+    }
+  });
+
+  editRowBtn.addEventListener('click', () => {
+    const selectedRadio = document.querySelector('input[type="radio"][name="selectRow"]:checked');
+    if (!selectedRadio) {
+      alert('Please select a row to edit.');
+      return;
+    }
+    const row = selectedRadio.closest('tr');
+    if (currentEditingRow === row) {
+      // End edit mode
+      Array.from(row.cells).forEach((cell, index) => {
+        if (index > 0) {  // skip the radio cell
+          cell.contentEditable = false;
+          cell.style.backgroundColor = "";
+        }
+      });
+      editRowBtn.textContent = "Edit Row";
+      currentEditingRow = null;
+    } else {
+      // If another row was being edited, revert it
+      if (currentEditingRow) {
+        Array.from(currentEditingRow.cells).forEach((cell, index) => {
+          if (index > 0) {
+            cell.contentEditable = false;
+            cell.style.backgroundColor = "";
+          }
+        });
+      }
+      // Start editing new row
+      Array.from(row.cells).forEach((cell, index) => {
+        if (index > 0) { // skip the radio cell
+          cell.contentEditable = true;
+          cell.style.backgroundColor = "#ffffe0";
+        }
+      });
+      editRowBtn.textContent = "Save Row";
+      currentEditingRow = row;
+    }
+  });
+
+  document.getElementById('importBtn').addEventListener('click', () => {
+    alert('Import functionality not implemented.');
+  });
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    alert('Export functionality not implemented.');
+  });
+</script>
+</body>
 </html>

@@ -1,94 +1,154 @@
+/* Reset some default browser styles */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Arial", sans-serif;
+  box-sizing: border-box;
 }
 
-html, body {
+/* Use a suitable font or your preference */
+body.login-page {
+  font-family: Arial, sans-serif;
+  background: url("soldiersearch-thumb-845x321.jpg") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  color: #000; /* Text color on top of background */
+}
+
+/* Diagonal overlays on the body to create the "X" effect */
+body.login-page::before,
+body.login-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  background-color: #808080;
-  color: #eaeaea;
-  display: flex;
-  flex-direction: column;
+  background: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
 }
 
-header {
-  background: #4A1C1C;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
+body.login-page::before {
+  /* Top diagonal overlay: from top corners to center */
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+}
+
+body.login-page::after {
+  /* Bottom diagonal overlay: from bottom corners to center */
+  clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+}
+
+/* The main container that holds everything */
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1; /* Ensures content appears above overlays */
+}
+
+/* "Welcome" text at top-left */
+.welcome {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  font-size: 3rem;
   font-weight: bold;
-  flex-shrink: 0;
 }
 
-main {
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
-  background: #2E1A1A;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(74, 28, 28, 0.5);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+/* Logo / Group title at top-right */
+.logo {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  text-align: right;
 }
 
-h1 {
-  text-align: center;
-  color: #A52A2A;
+.logo h2 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+/* Administrators box (left side) */
+.admin-box {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  width: 300px;
+}
+
+.admin-box h3 {
+  font-size: 1.8rem;
   margin-bottom: 20px;
 }
 
-label {
-  display: block;
-  margin-top: 10px;
+.admin-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-box label {
+  margin-bottom: 5px;
   font-weight: bold;
-  color: #eaeaea;
 }
 
-input {
-  width: 100%;
+.admin-box input {
+  margin-bottom: 15px;
   padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #A52A2A;
-  border-radius: 5px;
-  background: #3B1F1F;
-  color: #eaeaea;
+  border: 1px solid #aaa;
+  border-radius: 4px;
 }
 
-button, .nav-buttons a {
-  display: inline-block;
-  padding: 10px 20px;
+/* Error message styling */
+.error {
+  color: red;
+  font-style: italic;
+  margin-bottom: 10px;
+  display: none; /* Hide the error by default */
+}
+
+/* Button style for the admin "Log In" */
+.admin-box button {
+  padding: 10px;
   background: #A52A2A;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin-top: 10px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover, .nav-buttons a:hover {
-  background: #8B1E1E;
+.admin-box button:hover {
+  background: #333;
 }
 
-.nav-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+/* The "or" text in the middle */
+.or {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 
-footer {
-  margin-top: auto;
-  text-align: center;
+/* Guest box on the right side */
+.guest-box {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform: translateY(-50%);
+}
+
+.guest-box button {
   padding: 10px;
-  background: #4A1C1C;
-  color: white;
-  border-radius: 0 0 10px 10px;
-  flex-shrink: 0;
+  background: #A52A2A;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.guest-box button:hover {
+  background: #333;
 }
