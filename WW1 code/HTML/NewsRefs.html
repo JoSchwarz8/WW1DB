@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Those buried in Bradford</title>
+  <title>Newspaper index</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-
-    /* Let the table-container flex to fill available space */
+    /* Remove fixed centering from table-container */
     .table-container {
-      /* Remove margin: 0 auto if it was centering the table.
-         If you want the table narrower or wider, you can set a width or max-width here. */
       flex: 1;
-      min-width: 0; /* allows the table to shrink if needed */
+      min-width: 0;
     }
 
     .scrollable-table {
@@ -41,7 +38,7 @@
 </head>
 <body class="table-page">
 <div class="container">
-  <h1>Those buried in Bradford</h1>
+  <h1>Newspaper index</h1>
 
   <!-- Search Row -->
   <div class="search-row">
@@ -53,50 +50,54 @@
       <label for="surname">Surname:</label>
       <input type="text" id="surname" placeholder="Enter surname">
     </div>
-    <div class="input-group">
-      <label for="cemetery">Cemetery:</label>
-      <input type="text" id="cemetery" placeholder="Enter cemetery">
-    </div>
     <div class="search-buttons">
-      <!-- Use IDs if you want to attach JS to these buttons -->
-      <button type="button" id="clearFieldsBtn">Clear Fields</button>
+      <button type="button" id="clearBtn">Clear fields</button>
       <button type="button" id="searchBtn">Search</button>
     </div>
   </div>
 
-
-  <!-- Main content: Table on the left, side buttons on the right -->
+  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
+    <!-- Table Container with its scrollable wrapper (preserving the horizontal scrollbar) -->
     <div class="table-container">
-      <div class="scrollable-table">
+      <div class="table-wrapper">
         <table id="dataTable">
           <thead>
           <tr>
             <th></th>
             <th>Surname</th>
             <th>Forename</th>
-            <th>Age</th>
-            <th>Medals</th>
-            <th>Date of Death</th>
             <th>Rank</th>
-            <th>Service Number</th>
+            <th>Address</th>
             <th>Regiment</th>
             <th>Unit</th>
-            <th>Cemetery</th>
-            <th>Grave Reference</th>
-            <th>Info</th>
+            <th>Article Comment</th>
+            <th>Newspaper Name</th>
+            <th>Newspaper Date</th>
+            <th>Page/Col</th>
+            <th>Photo incl</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td><input type="radio" name="recordSelect"></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <td class="radio-cell"><input type="radio" name="recordSelect"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <!-- Side Buttons (with its own vertical scrollbar if needed) -->
     <div class="list-container">
       <ul>
         <li><button type="button" id="addRowBtn">Add Row</button></li>
@@ -108,20 +109,19 @@
     </div>
   </div>
 
-  <!-- Bottom section: search results left, nav arrows center, back button right -->
+  <!-- Bottom Section -->
   <div class="bottom-section">
-    <div class="search-results">No of search results: <span id="searchResults">0</span></div>
+    <div class="search-results">No of search results: <span id="resultsCount">0</span></div>
     <div class="nav-buttons">
-      <button type="button">&larr;</button>
-      <button type="button">&rarr;</button>
+      <button type="button" id="prevBtn">&larr;</button>
+      <button type="button" id="nextBtn">&rarr;</button>
     </div>
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
 
 <script>
-  /* Same JS as before, unchanged: */
-
+  // JavaScript remains the same
   const tableBody = document.querySelector('#dataTable tbody');
   const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');
@@ -129,7 +129,6 @@
   const importBtn = document.getElementById('importBtn');
   const exportBtn = document.getElementById('exportBtn');
   let currentEditingRow = null;
-
   const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
 
   addRowBtn.addEventListener('click', () => {
@@ -167,7 +166,6 @@
     }
     const row = selectedRadio.closest('tr');
     if (currentEditingRow === row) {
-      // Save row
       Array.from(row.cells).forEach((cell, index) => {
         if (index > 0) {
           cell.contentEditable = false;
@@ -177,16 +175,14 @@
       editRowBtn.textContent = "Edit Row";
       currentEditingRow = null;
     } else {
-      // If another row is in edit mode, reset it
       if (currentEditingRow) {
-        Array.from(currentEditingRow.cells).forEach((cell, i) => {
-          if (i > 0) {
+        Array.from(currentEditingRow.cells).forEach((cell, index) => {
+          if (index > 0) {
             cell.contentEditable = false;
             cell.style.backgroundColor = "";
           }
         });
       }
-      // Enter edit mode
       Array.from(row.cells).forEach((cell, index) => {
         if (index > 0) {
           cell.contentEditable = true;
@@ -222,6 +218,20 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    document.getElementById('forename').value = '';
+    document.getElementById('surname').value = '';
+  });
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    alert('Search functionality not implemented.');
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    alert('Previous page not implemented.');
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    alert('Next page not implemented.');
   });
 </script>
 </body>
