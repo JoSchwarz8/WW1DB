@@ -8,6 +8,38 @@
 </head>
 <body class="login-page">
 
+ 
+<!-- FULLSCREEN MODE IMPLEMENTATION BELOW FOR THE INDEX PAGE-->
+  <script>
+    function getFullscreenElement(){
+      return document.fullscreenElement 
+      || document.webkitFullscreenElement 
+      || document.mozFullscreenElement 
+      || document.msFullscreenElement;
+    }
+
+    function toggleFullscreen(){
+      if(getFullscreenElement()){
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen().catch(console.log);
+      }
+    }
+
+    document.addEventListener("dblclick", () =>{
+       toggleFullscreen();
+    });
+
+
+    document.addEventListener("dblclick", () => {
+      console.log("full screen changed!");
+    });
+
+
+   
+  </script>
+
+ 
 <!-- NEW Top Banner -->
 <div class="top-bar">
   <h1 class="welcome">Welcome</h1>
@@ -32,6 +64,7 @@
       <p class="error">Incorrect password, please try again</p>
 
       <button type="submit">Log In</button>
+     
     </form>
   </div>
 
