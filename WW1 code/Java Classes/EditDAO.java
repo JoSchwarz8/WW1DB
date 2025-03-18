@@ -44,4 +44,44 @@ public class EditDAO {
         }
         return true;
     }
+    
+    public boolean EditBurials(EditBurials editBurials) throws SQLException{
+        try (Connection con = DriverManager.getConnection(DB_URL,DB_USER, DB_PASS)) { //connection to the DB
+            String sql = "UPDATE Burials SET Surname=?, Forename=?, DoB=?, Medals=?, Date_of_Death=?, Rank=?, Service_Number=?, Regiment=?, Battalion=?, Cementary=?, Grave_Reference=?, Info=? WHERE Service_Number=?";
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+            stmt.setString(1, editBurials.getSurname());
+            stmt.setString(2, editBurials.getForename());
+            stmt.setInt(3, editBurials.getDoB());
+            stmt.setString(4, editBurials.getMedals());
+            stmt.setString(5, editBurials.getDate_of_Death());
+            stmt.setString(6, editBurials.getRank());
+            stmt.setString(7, editBurials.getService_Number());
+            stmt.setString(8, editBurials.getRegiment());
+            stmt.setString(9, editBurials.getBattalion());
+            stmt.setString(10, editBurials.getCemetery());
+            stmt.setString(11, editBurials.getGrave_Reference());
+            stmt.setString(12, editBurials.getInfo());
+        }catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+
+
+    public boolean EditBiography(EditBiography editBiography) {
+            try (Connection con = DriverManager.getConnection(DB_URL,DB_USER, DB_PASS)){ //connection to the DB
+                String sql = "UPDATE Biography_Information SET surname=?, forename=?, regiment=?, Service_Number=?, Biography_attachment WHERE Service_Number=?";
+                PreparedStatement stmt = con.prepareStatement(sql.toString()); //sends the sql query to the DB
+                stmt.setString(1, editBiography.getSurname());
+                stmt.setString(2, editBiography.getForename());
+                stmt.setString(3, editBiography.getRegiment());
+                stmt.setInt(4, editBiography.getService_Number());
+                stmt.setString(5, editBiography.getBiography_attachment());
+
+
+            }catch (SQLException e){
+                return false;
+            }
+            return true;
+        }
 }
