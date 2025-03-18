@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Records</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Additional styling for the comprehensive edit form */
+    .edit-form {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      max-height: 80vh;
+      overflow-y: auto;
+      width: 350px; /* adjust width as needed */
+    }
+    .edit-form h2 {
+      margin-bottom: 15px;
+      color: #9b111e;
+    }
+    .edit-form .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+    .edit-form label {
+      color: #9b111e;
+      font-weight: bold;
+      margin-bottom: 3px;
+      font-size: 0.9rem;
+    }
+    .edit-form input {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 5px;
+      font-size: 0.9rem;
+    }
+    .edit-form button {
+      padding: 10px 20px;
+      background-color: #9b111e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .edit-form button:hover {
+      background-color: #7a0c17;
+    }
+    /* Ensure table is scrollable horizontally */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    /* Adjust table header font-size for readability */
+    table thead th {
+      font-size: 0.8rem;
+      padding: 8px;
+      white-space: nowrap;
+    }
+    table tbody td {
+      font-size: 0.8rem;
+      padding: 6px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body class="table-page">
+<div class="container">
+  <h1>Edit Records</h1>
+
+  <!-- Main Content: Table and Edit Form -->
+  <div class="main-content">
+    <!-- Table Section -->
+    <div class="table-container">
+      <div class="table-wrapper scrollable-table">
+        <table id="dataTable">
+          <thead>
+          <tr>
+            <th>Select</th>
+            <th>Forename</th>
+            <th>Surname</th>
+            <th>Rank</th>
+            <th>Address</th>
+            <th>Electoral Ward</th>
+            <th>Town</th>
+            <th>Regiment</th>
+            <th>Unit</th>
+            <th>Company</th>
+            <th>Age</th>
+            <th>Service No</th>
+            <th>Other Regiment</th>
+            <th>Other Unit</th>
+            <th>Other Service No</th>
+            <th>Medals</th>
+            <th>Enlistment Date</th>
+            <th>Discharge Date</th>
+            <th>Death Date</th>
+            <th>Misc Info Nroh</th>
+            <th>Cemetery/Memorial</th>
+            <th>Cemetery/Memorial Ref</th>
+            <th>Cemetery/Memorial Country</th>
+            <th>Additional CWGC info</th>
+            <th>Biography Attachment</th>
+            <th>Memorial</th>
+            <th>Memorial Location</th>
+            <th>Memorial Info</th>
+            <th>Memorial Postcode</th>
+            <th>District</th>
+            <th>Photo Available</th>
+            <th>Article Comment</th>
+            <th>Newspaper Name</th>
+            <th>Newspaper Date</th>
+            <th>Page/Col</th>
+            <th>Photo Incl</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- Example record row -->
+          <tr>
+            <td><input type="radio" name="recordSelect"></td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>Sergeant</td>
+            <td>123 Main St</td>
+            <td>Central</td>
+            <td>Bradford</td>
+            <td>1st Infantry</td>
+            <td>A Company</td>
+            <td>Alpha</td>
+            <td>30</td>
+            <td>123456</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Medal of Honor</td>
+            <td>2020-01-01</td>
+            <td>2020-12-31</td>
+            <td>2021-01-15</td>
+            <td>Info here</td>
+            <td>Bradford Memorial</td>
+            <td>GR-789</td>
+            <td>UK</td>
+            <td>Extra info</td>
+            <td>bio.pdf</td>
+            <td>Local Memorial</td>
+            <td>Town Hall</td>
+            <td>Memorial Info</td>
+            <td>BR12</td>
+            <td>District 9</td>
+            <td>Yes</td>
+            <td>Comment here</td>
+            <td>The Daily News</td>
+            <td>2021-02-01</td>
+            <td>5/6</td>
+            <td>Yes</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Edit Form Section -->
+    <div class="edit-form" style="margin-left:20px;">
+      <h2>Edit Record</h2>
+      <form id="editRecordForm">
+        <!-- Updated input groups with correct IDs and labels -->
+        <div class="input-group">
+          <label for="editForename">Forename</label>
+          <input type="text" id="editForename" name="forename">
+        </div>
+        <div class="input-group">
+          <label for="editSurname">Surname</label>
+          <input type="text" id="editSurname" name="surname">
+        </div>
+        <div class="input-group">
+          <label for="editRank">Rank</label>
+          <input type="text" id="editRank" name="rank">
+        </div>
+        <div class="input-group">
+          <label for="editAddress">Address</label>
+          <input type="text" id="editAddress" name="address">
+        </div>
+        <div class="input-group">
+          <label for="editElectoralWard">Electoral Ward</label>
+          <input type="text" id="editElectoralWard" name="electoralWard">
+        </div>
+        <div class="input-group">
+          <label for="editTown">Town</label>
+          <input type="text" id="editTown" name="town">
+        </div>
+        <div class="input-group">
+          <label for="editRegiment">Regiment</label>
+          <input type="text" id="editRegiment" name="regiment">
+        </div>
+        <div class="input-group">
+          <label for="editUnit">Unit</label>
+          <input type="text" id="editUnit" name="unit">
+        </div>
+        <div class="input-group">
+          <label for="editCompany">Company</label>
+          <input type="text" id="editCompany" name="company">
+        </div>
+        <div class="input-group">
+          <label for="editAge">Age</label>
+          <input type="text" id="editAge" name="age">
+        </div>
+        <div class="input-group">
+          <label for="editServiceNo">Service No</label>
+          <input type="text" id="editServiceNo" name="serviceNo">
+        </div>
+        <div class="input-group">
+          <label for="editOtherRegiment">Other Regiment</label>
+          <input type="text" id="editOtherRegiment" name="otherRegiment">
+        </div>
+        <div class="input-group">
+          <label for="editOtherUnit">Other Unit</label>
+          <input type="text" id="editOtherUnit" name="otherUnit">
+        </div>
+        <div class="input-group">
+          <label for="editOtherServiceNo">Other Service No</label>
+          <input type="text" id="editOtherServiceNo" name="otherServiceNo">
+        </div>
+        <div class="input-group">
+          <label for="editMedals">Medals</label>
+          <input type="text" id="editMedals" name="medals">
+        </div>
+        <div class="input-group">
+          <label for="editEnlistmentDate">Enlistment Date</label>
+          <input type="date" id="editEnlistmentDate" name="enlistmentDate">
+        </div>
+        <div class="input-group">
+          <label for="editDischargeDate">Discharge Date</label>
+          <input type="date" id="editDischargeDate" name="dischargeDate">
+        </div>
+        <div class="input-group">
+          <label for="editDeathDate">Death Date</label>
+          <input type="date" id="editDeathDate" name="deathDate">
+        </div>
+        <div class="input-group">
+          <label for="editMiscInfoNroh">Misc Info Nroh</label>
+          <input type="text" id="editMiscInfoNroh" name="miscInfoNroh">
+        </div>
+        <div class="input-group">
+          <label for="editCemeteryMemorial">Cemetery/Memorial</label>
+          <input type="text" id="editCemeteryMemorial" name="cemeteryMemorial">
+        </div>
+        <div class="input-group">
+          <label for="editCemeteryMemorialRef">Cemetery/Memorial Ref</label>
+          <input type="text" id="editCemeteryMemorialRef" name="cemeteryMemorialRef">
+        </div>
+        <div class="input-group">
+          <label for="editCemeteryMemorialCountry">Cemetery/Memorial Country</label>
+          <input type="text" id="editCemeteryMemorialCountry" name="cemeteryMemorialCountry">
+        </div>
+        <div class="input-group">
+          <label for="editAdditionalCWGC">Additional CWGC info</label>
+          <input type="text" id="editAdditionalCWGC" name="additionalCWGC">
+        </div>
+        <div class="input-group">
+          <label for="editBiographyAttachment">Biography Attachment</label>
+          <input type="text" id="editBiographyAttachment" name="biographyAttachment">
+        </div>
+        <div class="input-group">
+          <label for="editMemorial">Memorial</label>
+          <input type="text" id="editMemorial" name="memorial">
+        </div>
+        <div class="input-group">
+          <label for="editMemorialLocation">Memorial Location</label>
+          <input type="text" id="editMemorialLocation" name="memorialLocation">
+        </div>
+        <div class="input-group">
+          <label for="editMemorialInfo">Memorial Info</label>
+          <input type="text" id="editMemorialInfo" name="memorialInfo">
+        </div>
+        <div class="input-group">
+          <label for="editMemorialPostcode">Memorial Postcode</label>
+          <input type="text" id="editMemorialPostcode" name="memorialPostcode">
+        </div>
+        <div class="input-group">
+          <label for="editDistrict">District</label>
+          <input type="text" id="editDistrict" name="district">
+        </div>
+        <div class="input-group">
+          <label for="editPhotoAvailable">Photo Available</label>
+          <input type="text" id="editPhotoAvailable" name="photoAvailable">
+        </div>
+        <div class="input-group">
+          <label for="editArticleComment">Article Comment</label>
+          <input type="text" id="editArticleComment" name="articleComment">
+        </div>
+        <div class="input-group">
+          <label for="editNewspaperName">Newspaper Name</label>
+          <input type="text" id="editNewspaperName" name="newspaperName">
+        </div>
+        <div class="input-group">
+          <label for="editNewspaperDate">Newspaper Date</label>
+          <input type="date" id="editNewspaperDate" name="newspaperDate">
+        </div>
+        <div class="input-group">
+          <label for="editPageCol">Page/Col</label>
+          <input type="text" id="editPageCol" name="pageCol">
+        </div>
+        <div class="input-group">
+          <label for="editPhotoIncl">Photo Incl</label>
+          <input type="text" id="editPhotoIncl" name="photoIncl">
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom Section -->
+  <div class="bottom-section">
+    <a class="back-button" href="dashboard.html">Back</a>
+  </div>
+</div>
+
+<script>
+  // Get references to the table and the edit form
+  const table = document.getElementById('dataTable');
+  const editForm = document.getElementById('editRecordForm');
+  let selectedRow = null;
+
+  // Add event listeners to each radio button in the table to load the record into the form
+  document.querySelectorAll('input[name="recordSelect"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      selectedRow = this.closest('tr');
+      // Populate the edit form fields with the corresponding cell values.
+      // Mapping based on table header: cell[1] = Forename, cell[2] = Surname, etc.
+      document.getElementById('editForename').value = selectedRow.cells[1].textContent;
+      document.getElementById('editSurname').value = selectedRow.cells[2].textContent;
+      document.getElementById('editRank').value = selectedRow.cells[3].textContent;
+      document.getElementById('editAddress').value = selectedRow.cells[4].textContent;
+      document.getElementById('editElectoralWard').value = selectedRow.cells[5].textContent;
+      document.getElementById('editTown').value = selectedRow.cells[6].textContent;
+      document.getElementById('editRegiment').value = selectedRow.cells[7].textContent;
+      document.getElementById('editUnit').value = selectedRow.cells[8].textContent;
+      document.getElementById('editCompany').value = selectedRow.cells[9].textContent;
+      document.getElementById('editAge').value = selectedRow.cells[10].textContent;
+      document.getElementById('editServiceNo').value = selectedRow.cells[11].textContent;
+      document.getElementById('editOtherRegiment').value = selectedRow.cells[12].textContent;
+      document.getElementById('editOtherUnit').value = selectedRow.cells[13].textContent;
+      document.getElementById('editOtherServiceNo').value = selectedRow.cells[14].textContent;
+      document.getElementById('editMedals').value = selectedRow.cells[15].textContent;
+      document.getElementById('editEnlistmentDate').value = selectedRow.cells[16].textContent;
+      document.getElementById('editDischargeDate').value = selectedRow.cells[17].textContent;
+      document.getElementById('editDeathDate').value = selectedRow.cells[18].textContent;
+      document.getElementById('editMiscInfoNroh').value = selectedRow.cells[19].textContent;
+      document.getElementById('editCemeteryMemorial').value = selectedRow.cells[20].textContent;
+      document.getElementById('editCemeteryMemorialRef').value = selectedRow.cells[21].textContent;
+      document.getElementById('editCemeteryMemorialCountry').value = selectedRow.cells[22].textContent;
+      document.getElementById('editAdditionalCWGC').value = selectedRow.cells[23].textContent;
+      document.getElementById('editBiographyAttachment').value = selectedRow.cells[24].textContent;
+      document.getElementById('editMemorial').value = selectedRow.cells[25].textContent;
+      document.getElementById('editMemorialLocation').value = selectedRow.cells[26].textContent;
+      document.getElementById('editMemorialInfo').value = selectedRow.cells[27].textContent;
+      document.getElementById('editMemorialPostcode').value = selectedRow.cells[28].textContent;
+      document.getElementById('editDistrict').value = selectedRow.cells[29].textContent;
+      document.getElementById('editPhotoAvailable').value = selectedRow.cells[30].textContent;
+      document.getElementById('editArticleComment').value = selectedRow.cells[31].textContent;
+      document.getElementById('editNewspaperName').value = selectedRow.cells[32].textContent;
+      document.getElementById('editNewspaperDate').value = selectedRow.cells[33].textContent;
+      document.getElementById('editPageCol').value = selectedRow.cells[34].textContent;
+      document.getElementById('editPhotoIncl').value = selectedRow.cells[35].textContent;
+    });
+  });
+
+  // When the form is submitted, update the selected table row with the new values
+  editForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (!selectedRow) {
+      alert("Please select a record from the table to edit.");
+      return;
+    }
+    selectedRow.cells[1].textContent = document.getElementById('editForename').value;
+    selectedRow.cells[2].textContent = document.getElementById('editSurname').value;
+    selectedRow.cells[3].textContent = document.getElementById('editRank').value;
+    selectedRow.cells[4].textContent = document.getElementById('editAddress').value;
+    selectedRow.cells[5].textContent = document.getElementById('editElectoralWard').value;
+    selectedRow.cells[6].textContent = document.getElementById('editTown').value;
+    selectedRow.cells[7].textContent = document.getElementById('editRegiment').value;
+    selectedRow.cells[8].textContent = document.getElementById('editUnit').value;
+    selectedRow.cells[9].textContent = document.getElementById('editCompany').value;
+    selectedRow.cells[10].textContent = document.getElementById('editAge').value;
+    selectedRow.cells[11].textContent = document.getElementById('editServiceNo').value;
+    selectedRow.cells[12].textContent = document.getElementById('editOtherRegiment').value;
+    selectedRow.cells[13].textContent = document.getElementById('editOtherUnit').value;
+    selectedRow.cells[14].textContent = document.getElementById('editOtherServiceNo').value;
+    selectedRow.cells[15].textContent = document.getElementById('editMedals').value;
+    selectedRow.cells[16].textContent = document.getElementById('editEnlistmentDate').value;
+    selectedRow.cells[17].textContent = document.getElementById('editDischargeDate').value;
+    selectedRow.cells[18].textContent = document.getElementById('editDeathDate').value;
+    selectedRow.cells[19].textContent = document.getElementById('editMiscInfoNroh').value;
+    selectedRow.cells[20].textContent = document.getElementById('editCemeteryMemorial').value;
+    selectedRow.cells[21].textContent = document.getElementById('editCemeteryMemorialRef').value;
+    selectedRow.cells[22].textContent = document.getElementById('editCemeteryMemorialCountry').value;
+    selectedRow.cells[23].textContent = document.getElementById('editAdditionalCWGC').value;
+    selectedRow.cells[24].textContent = document.getElementById('editBiographyAttachment').value;
+    selectedRow.cells[25].textContent = document.getElementById('editMemorial').value;
+    selectedRow.cells[26].textContent = document.getElementById('editMemorialLocation').value;
+    selectedRow.cells[27].textContent = document.getElementById('editMemorialInfo').value;
+    selectedRow.cells[28].textContent = document.getElementById('editMemorialPostcode').value;
+    selectedRow.cells[29].textContent = document.getElementById('editDistrict').value;
+    selectedRow.cells[30].textContent = document.getElementById('editPhotoAvailable').value;
+    selectedRow.cells[31].textContent = document.getElementById('editArticleComment').value;
+    selectedRow.cells[32].textContent = document.getElementById('editNewspaperName').value;
+    selectedRow.cells[33].textContent = document.getElementById('editNewspaperDate').value;
+    selectedRow.cells[34].textContent = document.getElementById('editPageCol').value;
+    selectedRow.cells[35].textContent = document.getElementById('editPhotoIncl').value;
+
+    alert("Record updated successfully!");
+    editForm.reset();
+    // Deselect the radio button after saving
+    selectedRow.querySelector('input[type="radio"]').checked = false;
+    selectedRow = null;
+  });
+</script>
+</body>
+</html>
