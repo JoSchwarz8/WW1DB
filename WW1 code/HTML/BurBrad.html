@@ -5,25 +5,16 @@
   <title>Those buried in Bradford</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-
-    /* Let the table-container flex to fill available space */
     .table-container {
-      /* Remove margin: 0 auto if it was centering the table.
-         If you want the table narrower or wider, you can set a width or max-width here. */
       flex: 1;
-      min-width: 0; /* allows the table to shrink if needed */
+      min-width: 0;
     }
-
     .scrollable-table {
-      overflow-x: auto; /* horizontal scroll if needed */
+      overflow-x: auto;
     }
-
-    /* Keep the list-container at a fixed width (or adjust as needed). */
     .list-container {
       width: 220px;
     }
-
-    /* The side buttons styling */
     .list-container ul {
       list-style: none;
       padding: 0;
@@ -42,8 +33,6 @@
 <body class="table-page">
 <div class="container">
   <h1>Those buried in Bradford</h1>
-
-  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -58,14 +47,10 @@
       <input type="text" id="cemetery" placeholder="Enter cemetery">
     </div>
     <div class="search-buttons">
-      <!-- Use IDs if you want to attach JS to these buttons -->
       <button type="button" id="clearFieldsBtn">Clear Fields</button>
       <button type="button" id="searchBtn">Search</button>
     </div>
   </div>
-
-
-  <!-- Main content: Table on the left, side buttons on the right -->
   <div class="main-content">
     <div class="table-container">
       <div class="scrollable-table">
@@ -90,8 +75,18 @@
           <tbody>
           <tr>
             <td><input type="radio" name="recordSelect"></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           </tbody>
         </table>
@@ -107,8 +102,6 @@
       </ul>
     </div>
   </div>
-
-  <!-- Bottom section: search results left, nav arrows center, back button right -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="searchResults">0</span></div>
     <div class="nav-buttons">
@@ -118,10 +111,7 @@
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
-
 <script>
-  /* Same JS as before, unchanged: */
-
   const tableBody = document.querySelector('#dataTable tbody');
   const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');
@@ -129,9 +119,7 @@
   const importBtn = document.getElementById('importBtn');
   const exportBtn = document.getElementById('exportBtn');
   let currentEditingRow = null;
-
   const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
-
   addRowBtn.addEventListener('click', () => {
     const newRow = document.createElement('tr');
     const radioCell = document.createElement('td');
@@ -144,7 +132,6 @@
     }
     tableBody.appendChild(newRow);
   });
-
   deleteRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
     if (selectedRadio) {
@@ -158,7 +145,6 @@
       alert('Please select a row to delete.');
     }
   });
-
   editRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
     if (!selectedRadio) {
@@ -167,7 +153,6 @@
     }
     const row = selectedRadio.closest('tr');
     if (currentEditingRow === row) {
-      // Save row
       Array.from(row.cells).forEach((cell, index) => {
         if (index > 0) {
           cell.contentEditable = false;
@@ -177,7 +162,6 @@
       editRowBtn.textContent = "Edit Row";
       currentEditingRow = null;
     } else {
-      // If another row is in edit mode, reset it
       if (currentEditingRow) {
         Array.from(currentEditingRow.cells).forEach((cell, i) => {
           if (i > 0) {
@@ -186,7 +170,6 @@
           }
         });
       }
-      // Enter edit mode
       Array.from(row.cells).forEach((cell, index) => {
         if (index > 0) {
           cell.contentEditable = true;
@@ -197,11 +180,9 @@
       currentEditingRow = row;
     }
   });
-
   importBtn.addEventListener('click', () => {
     alert('Import functionality not implemented.');
   });
-
   exportBtn.addEventListener('click', () => {
     let csvContent = "";
     const rows = document.querySelectorAll("#dataTable tr");

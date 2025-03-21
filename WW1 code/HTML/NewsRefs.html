@@ -5,22 +5,16 @@
   <title>Newspaper index</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Remove fixed centering from table-container */
     .table-container {
       flex: 1;
       min-width: 0;
     }
-
     .scrollable-table {
-      overflow-x: auto; /* horizontal scroll if needed */
+      overflow-x: auto;
     }
-
-    /* Keep the list-container at a fixed width (or adjust as needed). */
     .list-container {
       width: 220px;
     }
-
-    /* The side buttons styling */
     .list-container ul {
       list-style: none;
       padding: 0;
@@ -39,8 +33,6 @@
 <body class="table-page">
 <div class="container">
   <h1>Newspaper index</h1>
-
-  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -55,10 +47,7 @@
       <button type="button" id="searchBtn">Search</button>
     </div>
   </div>
-
-  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
-    <!-- Table Container with its scrollable wrapper (preserving the horizontal scrollbar) -->
     <div class="table-container">
       <div class="table-wrapper">
         <table id="dataTable">
@@ -97,7 +86,6 @@
         </table>
       </div>
     </div>
-    <!-- Side Buttons (with its own vertical scrollbar if needed) -->
     <div class="list-container">
       <ul>
         <li><button type="button" id="addRowBtn">Add Row</button></li>
@@ -108,8 +96,6 @@
       </ul>
     </div>
   </div>
-
-  <!-- Bottom Section -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="resultsCount">0</span></div>
     <div class="nav-buttons">
@@ -119,9 +105,7 @@
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
-
 <script>
-  // JavaScript remains the same
   const tableBody = document.querySelector('#dataTable tbody');
   const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');
@@ -130,7 +114,6 @@
   const exportBtn = document.getElementById('exportBtn');
   let currentEditingRow = null;
   const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
-
   addRowBtn.addEventListener('click', () => {
     const newRow = document.createElement('tr');
     const radioCell = document.createElement('td');
@@ -143,7 +126,6 @@
     }
     tableBody.appendChild(newRow);
   });
-
   deleteRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
     if (selectedRadio) {
@@ -157,7 +139,6 @@
       alert('Please select a row to delete.');
     }
   });
-
   editRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
     if (!selectedRadio) {
@@ -193,11 +174,9 @@
       currentEditingRow = row;
     }
   });
-
   importBtn.addEventListener('click', () => {
     alert('Import functionality not implemented.');
   });
-
   exportBtn.addEventListener('click', () => {
     let csvContent = "";
     const rows = document.querySelectorAll("#dataTable tr");
@@ -219,7 +198,6 @@
     link.click();
     document.body.removeChild(link);
   });
-
   document.getElementById('clearBtn').addEventListener('click', () => {
     document.getElementById('forename').value = '';
     document.getElementById('surname').value = '';

@@ -5,7 +5,6 @@
   <title>Add to Database - Bradford</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Additional styling for the add-record form */
     .form-section {
       background-color: #999;
       padding: 20px;
@@ -46,7 +45,6 @@
       justify-content: flex-start;
       margin-top: 10px;
     }
-    /* Table styles for extended fields */
     .table-wrapper {
       overflow-x: auto;
     }
@@ -71,8 +69,6 @@
 <body class="table-page">
 <div class="container">
   <h1>Add to Database - Bradford</h1>
-
-  <!-- Expanded Form Section with all fields -->
   <form id="addRecordForm" class="form-section">
     <div class="input-group">
       <label for="forename">Forename</label>
@@ -220,7 +216,6 @@
     </div>
   </form>
 
-  <!-- Table to display added records -->
   <div class="table-container">
     <div class="table-wrapper scrollable-table">
       <table id="recordsTable">
@@ -264,24 +259,19 @@
         </tr>
         </thead>
         <tbody>
-        <!-- New records will be appended here -->
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- Back button -->
   <div class="bottom-section" style="margin-top:20px;">
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
 
 <script>
-  // Listen to form submission
   document.getElementById('addRecordForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form from submitting normally
-
-    // Collect values from the form fields in the same order as the table columns
+    event.preventDefault();
     const recordValues = [
       document.getElementById('forename').value,
       document.getElementById('surname').value,
@@ -319,20 +309,14 @@
       document.getElementById('pageCol').value,
       document.getElementById('photoIncl').value
     ];
-
-    // Create a new table row and cells
     const tableBody = document.querySelector('#recordsTable tbody');
     const newRow = document.createElement('tr');
-
     recordValues.forEach(value => {
       const cell = document.createElement('td');
       cell.textContent = value;
       newRow.appendChild(cell);
     });
-
     tableBody.appendChild(newRow);
-
-    // Optionally clear the form after submission
     this.reset();
   });
 </script>

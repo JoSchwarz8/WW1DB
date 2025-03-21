@@ -12,29 +12,11 @@
     .scrollable-table {
       overflow-x: auto;
     }
-    .list-container {
-      width: 220px;
-    }
-    .list-container ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .list-container li {
-      margin-bottom: 15px;
-    }
-    .list-container button {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-    }
   </style>
 </head>
 <body class="table-page">
 <div class="container">
   <h1>Those buried in Bradford</h1>
-
-  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -53,8 +35,6 @@
       <button type="button" id="searchBtn">Search</button>
     </div>
   </div>
-
-  <!-- Main content: Table and Side Buttons -->
   <div class="main-content">
     <div class="table-container">
       <div class="scrollable-table">
@@ -79,23 +59,24 @@
           <tbody>
           <tr>
             <td><input type="radio" name="recordSelect"></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
-            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <!-- Side Buttons: Only Import and Export remain -->
-    <div class="list-container">
-      <ul>
-        <li><button type="button" id="importBtn">Import</button></li>
-        <li><button type="button" id="exportBtn">Export</button></li>
-      </ul>
-    </div>
   </div>
-
-  <!-- Bottom section -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="searchResults">0</span></div>
     <div class="nav-buttons">
@@ -105,33 +86,15 @@
     <a class="back-button" href="dashboardGuest.html">Back</a>
   </div>
 </div>
-
 <script>
-  // Removed add, delete and edit row functionality
-
-  const importBtn = document.getElementById('importBtn');
-  const exportBtn = document.getElementById('exportBtn');
-
-  exportBtn.addEventListener('click', () => {
-    let csvContent = "";
-    const rows = document.querySelectorAll("#dataTable tr");
-    rows.forEach((row) => {
-      const cells = row.querySelectorAll("th, td");
-      let rowData = [];
-      cells.forEach((cell) => {
-        rowData.push(cell.textContent.trim());
-      });
-      csvContent += rowData.join(",") + "\n";
-    });
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.setAttribute("href", url);
-    link.setAttribute("download", "table_data.csv");
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const clearFieldsBtn = document.getElementById('clearFieldsBtn');
+  clearFieldsBtn.addEventListener('click', () => {
+    document.getElementById('forename').value = '';
+    document.getElementById('surname').value = '';
+    document.getElementById('cemetery').value = '';
+  });
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    alert('Search functionality not implemented.');
   });
 </script>
 </body>

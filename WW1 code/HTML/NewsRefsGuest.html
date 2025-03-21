@@ -5,37 +5,18 @@
   <title>Newspaper index</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Remove fixed centering from table-container */
     .table-container {
       flex: 1;
       min-width: 0;
     }
     .scrollable-table {
-      overflow-x: auto; /* horizontal scroll if needed */
-    }
-    .list-container {
-      width: 220px;
-    }
-    .list-container ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .list-container li {
-      margin-bottom: 15px;
-    }
-    .list-container button {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
+      overflow-x: auto;
     }
   </style>
 </head>
 <body class="table-page">
 <div class="container">
   <h1>Newspaper index</h1>
-
-  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -50,8 +31,6 @@
       <button type="button" id="searchBtn">Search</button>
     </div>
   </div>
-
-  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
     <div class="table-container">
       <div class="table-wrapper">
@@ -91,16 +70,7 @@
         </table>
       </div>
     </div>
-
-    <div class="list-container">
-      <ul>
-        <li><button type="button" id="importBtn">Import</button></li>
-        <li><button type="button" id="exportBtn">Export</button></li>
-      </ul>
-    </div>
   </div>
-
-  <!-- Bottom Section -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="resultsCount">0</span></div>
     <div class="nav-buttons">
@@ -110,34 +80,7 @@
     <a class="back-button" href="dashboardGuest.html">Back</a>
   </div>
 </div>
-
 <script>
-
-  const importBtn = document.getElementById('importBtn');
-  const exportBtn = document.getElementById('exportBtn');
-
-  exportBtn.addEventListener('click', () => {
-    let csvContent = "";
-    const rows = document.querySelectorAll("#dataTable tr");
-    rows.forEach((row) => {
-      const cells = row.querySelectorAll("th, td");
-      let rowData = [];
-      cells.forEach((cell) => {
-        rowData.push(cell.textContent.trim());
-      });
-      csvContent += rowData.join(",") + "\n";
-    });
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.setAttribute("href", url);
-    link.setAttribute("download", "table_data.csv");
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-
   document.getElementById('clearBtn').addEventListener('click', () => {
     document.getElementById('forename').value = '';
     document.getElementById('surname').value = '';

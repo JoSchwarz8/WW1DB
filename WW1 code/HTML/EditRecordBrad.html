@@ -5,7 +5,6 @@
   <title>Edit Records</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Additional styling for the comprehensive edit form */
     .edit-form {
       background-color: #f9f9f9;
       padding: 20px;
@@ -13,7 +12,7 @@
       border: 1px solid #ddd;
       max-height: 80vh;
       overflow-y: auto;
-      width: 350px; /* adjust width as needed */
+      width: 350px;
     }
     .edit-form h2 {
       margin-bottom: 15px;
@@ -48,11 +47,9 @@
     .edit-form button:hover {
       background-color: #7a0c17;
     }
-    /* Ensure table is scrollable horizontally */
     .table-wrapper {
       overflow-x: auto;
     }
-    /* Adjust table header font-size for readability */
     table thead th {
       font-size: 0.8rem;
       padding: 8px;
@@ -68,10 +65,7 @@
 <body class="table-page">
 <div class="container">
   <h1>Edit Records</h1>
-
-  <!-- Main Content: Table and Edit Form -->
   <div class="main-content">
-    <!-- Table Section -->
     <div class="table-container">
       <div class="table-wrapper scrollable-table">
         <table id="dataTable">
@@ -116,7 +110,6 @@
           </tr>
           </thead>
           <tbody>
-          <!-- Example record row -->
           <tr>
             <td><input type="radio" name="recordSelect"></td>
             <td>John</td>
@@ -159,12 +152,9 @@
         </table>
       </div>
     </div>
-
-    <!-- Edit Form Section -->
     <div class="edit-form" style="margin-left:20px;">
       <h2>Edit Record</h2>
       <form id="editRecordForm">
-        <!-- Updated input groups with correct IDs and labels -->
         <div class="input-group">
           <label for="editForename">Forename</label>
           <input type="text" id="editForename" name="forename">
@@ -310,24 +300,19 @@
     </div>
   </div>
 
-  <!-- Bottom Section -->
   <div class="bottom-section">
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
 
 <script>
-  // Get references to the table and the edit form
   const table = document.getElementById('dataTable');
   const editForm = document.getElementById('editRecordForm');
   let selectedRow = null;
 
-  // Add event listeners to each radio button in the table to load the record into the form
   document.querySelectorAll('input[name="recordSelect"]').forEach(radio => {
     radio.addEventListener('change', function() {
       selectedRow = this.closest('tr');
-      // Populate the edit form fields with the corresponding cell values.
-      // Mapping based on table header: cell[1] = Forename, cell[2] = Surname, etc.
       document.getElementById('editForename').value = selectedRow.cells[1].textContent;
       document.getElementById('editSurname').value = selectedRow.cells[2].textContent;
       document.getElementById('editRank').value = selectedRow.cells[3].textContent;
@@ -366,7 +351,6 @@
     });
   });
 
-  // When the form is submitted, update the selected table row with the new values
   editForm.addEventListener('submit', function(event) {
     event.preventDefault();
     if (!selectedRow) {
@@ -408,10 +392,8 @@
     selectedRow.cells[33].textContent = document.getElementById('editNewspaperDate').value;
     selectedRow.cells[34].textContent = document.getElementById('editPageCol').value;
     selectedRow.cells[35].textContent = document.getElementById('editPhotoIncl').value;
-
     alert("Record updated successfully!");
     editForm.reset();
-    // Deselect the radio button after saving
     selectedRow.querySelector('input[type="radio"]').checked = false;
     selectedRow = null;
   });
