@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Add to Database - Bradford and Surrounding Townships</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-section {
+            background-color: #999;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .form-section .input-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 200px;
+        }
+        .form-section label {
+            color: #9b111e;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        .form-section input[type="text"],
+        .form-section input[type="date"] {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px 12px;
+            background-color: #fff;
+            font-size: 0.9rem;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table-container th,
+        .table-container td {
+            border: 1px solid #ddd;
+            padding: 6px 8px;
+            white-space: nowrap;
+            font-size: 0.8rem;
+        }
+        .table-container thead {
+            background-color: #9b111e;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="table-page">
+<div class="container">
+    <h1>Add to Database - Bradford and Surrounding Townships</h1>
+    <form id="addRecordForm" class="form-section">
+        <div class="input-group">
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
+        </div>
+        <div class="input-group">
+            <label for="forename">Forename</label>
+            <input type="text" id="forename" name="forename" placeholder="Enter forename" required>
+        </div>
+        <div class="input-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" placeholder="Enter address">
+        </div>
+        <div class="input-group">
+            <label for="electoralWard">Electoral Ward</label>
+            <input type="text" id="electoralWard" name="electoralWard" placeholder="Enter electoral ward">
+        </div>
+        <div class="input-group">
+            <label for="town">Town</label>
+            <input type="text" id="town" name="town" placeholder="Enter town">
+        </div>
+        <div class="input-group">
+            <label for="rank">Rank</label>
+            <input type="text" id="rank" name="rank" placeholder="Enter rank">
+        </div>
+        <div class="input-group">
+            <label for="regiment">Regiment</label>
+            <input type="text" id="regiment" name="regiment" placeholder="Enter regiment">
+        </div>
+        <div class="input-group">
+            <label for="unit">Unit</label>
+            <input type="text" id="unit" name="unit" placeholder="Enter unit">
+        </div>
+        <div class="input-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Enter company">
+        </div>
+        <div class="input-group">
+            <label for="age">Age</label>
+            <input type="text" id="age" name="age" placeholder="Enter age">
+        </div>
+        <div class="input-group">
+            <label for="serviceNo">Service No</label>
+            <input type="text" id="serviceNo" name="serviceNo" placeholder="Enter service number">
+        </div>
+        <div class="input-group">
+            <label for="otherRegiment">Other Regiment</label>
+            <input type="text" id="otherRegiment" name="otherRegiment" placeholder="Enter other regiment">
+        </div>
+        <div class="input-group">
+            <label for="otherUnit">Other Unit</label>
+            <input type="text" id="otherUnit" name="otherUnit" placeholder="Enter other unit">
+        </div>
+        <div class="input-group">
+            <label for="otherServiceNo">Other Service No</label>
+            <input type="text" id="otherServiceNo" name="otherServiceNo" placeholder="Enter other service number">
+        </div>
+        <div class="input-group">
+            <label for="medals">Medals</label>
+            <input type="text" id="medals" name="medals" placeholder="Enter medals">
+        </div>
+        <div class="input-group">
+            <label for="enlistmentDate">Enlistment Date</label>
+            <input type="date" id="enlistmentDate" name="enlistmentDate">
+        </div>
+        <div class="input-group">
+            <label for="dischargeDate">Discharge Date</label>
+            <input type="date" id="dischargeDate" name="dischargeDate">
+        </div>
+        <div class="input-group">
+            <label for="deathDate">Death Date</label>
+            <input type="date" id="deathDate" name="deathDate">
+        </div>
+        <div class="input-group">
+            <label for="miscInfoNroh">Misc Info Nroh</label>
+            <input type="text" id="miscInfoNroh" name="miscInfoNroh" placeholder="Enter miscellaneous info">
+        </div>
+        <div class="input-group">
+            <label for="cemeteryMemorial">Cemetery/Memorial</label>
+            <input type="text" id="cemeteryMemorial" name="cemeteryMemorial" placeholder="Enter cemetery/memorial">
+        </div>
+        <div class="input-group">
+            <label for="cemeteryMemorialRef">Cemetery/Memorial Ref</label>
+            <input type="text" id="cemeteryMemorialRef" name="cemeteryMemorialRef" placeholder="Enter cemetery/memorial ref">
+        </div>
+        <div class="input-group">
+            <label for="cemeteryMemorialCountry">Cemetery/Memorial Country</label>
+            <input type="text" id="cemeteryMemorialCountry" name="cemeteryMemorialCountry" placeholder="Enter cemetery/memorial country">
+        </div>
+        <div class="input-group">
+            <label for="additionalCWGC">Additional CWGC info</label>
+            <input type="text" id="additionalCWGC" name="additionalCWGC" placeholder="Enter additional CWGC info">
+        </div>
+        <div class="form-buttons">
+            <button type="submit" id="submitBtn">Add Record</button>
+            <button type="reset" id="clearFormBtn">Clear Fields</button>
+        </div>
+    </form>
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table id="recordsTable">
+                <thead>
+                <tr>
+                    <th>Surname</th>
+                    <th>Forename</th>
+                    <th>Address</th>
+                    <th>Electoral Ward</th>
+                    <th>Town</th>
+                    <th>Rank</th>
+                    <th>Regiment</th>
+                    <th>Unit</th>
+                    <th>Company</th>
+                    <th>Age</th>
+                    <th>Service No</th>
+                    <th>Other Regiment</th>
+                    <th>Other Unit</th>
+                    <th>Other Service No</th>
+                    <th>Medals</th>
+                    <th>Enlistment Date</th>
+                    <th>Discharge Date</th>
+                    <th>Death Date</th>
+                    <th>Misc Info Nroh</th>
+                    <th>Cemetery/Memorial</th>
+                    <th>Cemetery/Memorial Ref</th>
+                    <th>Cemetery/Memorial Country</th>
+                    <th>Additional CWGC info</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- New rows will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="bottom-section" style="margin-top:20px;">
+        <a class="back-button" href="dashboard.html">Back</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addRecordForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const recordValues = [
+            document.getElementById('surname').value,
+            document.getElementById('forename').value,
+            document.getElementById('address').value,
+            document.getElementById('electoralWard').value,
+            document.getElementById('town').value,
+            document.getElementById('rank').value,
+            document.getElementById('regiment').value,
+            document.getElementById('unit').value,
+            document.getElementById('company').value,
+            document.getElementById('age').value,
+            document.getElementById('serviceNo').value,
+            document.getElementById('otherRegiment').value,
+            document.getElementById('otherUnit').value,
+            document.getElementById('otherServiceNo').value,
+            document.getElementById('medals').value,
+            document.getElementById('enlistmentDate').value,
+            document.getElementById('dischargeDate').value,
+            document.getElementById('deathDate').value,
+            document.getElementById('miscInfoNroh').value,
+            document.getElementById('cemeteryMemorial').value,
+            document.getElementById('cemeteryMemorialRef').value,
+            document.getElementById('cemeteryMemorialCountry').value,
+            document.getElementById('additionalCWGC').value
+        ];
+        const tableBody = document.querySelector('#recordsTable tbody');
+        const newRow = document.createElement('tr');
+        recordValues.forEach(value => {
+            const cell = document.createElement('td');
+            cell.textContent = value;
+            newRow.appendChild(cell);
+        });
+        tableBody.appendChild(newRow);
+        this.reset();
+    });
+</script>
+</body>
+</html>
