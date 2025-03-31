@@ -5,16 +5,21 @@
   <title>Biographies</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Ensure table container is flexible */
     .table-container {
       flex: 1;
       min-width: 0;
     }
     .scrollable-table {
-      overflow-x: auto;
+      overflow-x: auto; /* horizontal scroll if needed */
     }
+
+    /* Keep the list-container at a fixed width (or adjust as needed). */
     .list-container {
       width: 220px;
     }
+
+    /* The side buttons styling */
     .list-container ul {
       list-style: none;
       padding: 0;
@@ -34,6 +39,7 @@
 <div class="container">
   <h1>Biographies</h1>
 
+  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -49,7 +55,9 @@
     </div>
   </div>
 
+  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
+    <!-- Table Container with its own horizontal scrollbar -->
     <div class="table-container">
       <div class="scrollable-table">
         <table id="dataTable">
@@ -76,6 +84,7 @@
         </table>
       </div>
     </div>
+    <!-- Side Buttons -->
     <div class="list-container">
       <ul>
         <li><button type="button" id="addRowBtn">Add Row</button></li>
@@ -87,6 +96,7 @@
     </div>
   </div>
 
+  <!-- Bottom section: search results left, nav arrows center, back button right -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="searchResults">0</span></div>
     <div class="nav-buttons">
@@ -98,6 +108,7 @@
 </div>
 
 <script>
+  // (JavaScript code remains the same as before)
   const tableBody = document.querySelector('#dataTable tbody');
   const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');

@@ -5,16 +5,22 @@
   <title>Bradford and surrounding townships</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Ensure table container works with flex layout */
     .table-container {
       flex: 1;
       min-width: 0;
     }
+
     .scrollable-table {
-      overflow-x: auto;
+      overflow-x: auto; /* horizontal scroll if needed */
     }
+
+    /* Keep the list-container at a fixed width (or adjust as needed). */
     .list-container {
       width: 220px;
     }
+
+    /* The side buttons styling */
     .list-container ul {
       list-style: none;
       padding: 0;
@@ -34,6 +40,7 @@
 <div class="container">
   <h1>Bradford and surrounding townships</h1>
 
+  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -49,7 +56,9 @@
     </div>
   </div>
 
+  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
+    <!-- Table Container with scrollable wrapper (unchanged) -->
     <div class="table-container">
       <div class="scrollable-table">
         <table id="dataTable">
@@ -84,6 +93,7 @@
           <tbody>
           <tr>
             <td><input type="radio" name="recordSelect"></td>
+            <!-- All cells as originally defined -->
             <td></td><td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td><td></td>
             <td></td><td></td><td></td><td></td><td></td>
@@ -93,6 +103,7 @@
         </table>
       </div>
     </div>
+    <!-- Side Buttons -->
     <div class="list-container">
       <ul>
         <li><button type="button" id="addRowBtn">Add Row</button></li>
@@ -104,6 +115,7 @@
     </div>
   </div>
 
+  <!-- Bottom section: search results left, nav arrows center, back button right -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="searchResults">0</span></div>
     <div class="nav-buttons">

@@ -5,16 +5,35 @@
   <title>Bradford Memorials</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Page-specific styles: */
+
+    /* .main-content is set to display flex in your styles.css,
+       but confirm you have something like:
+       .main-content {
+         display: flex;
+         gap: 20px;
+         align-items: flex-start;
+       }
+    */
+
+    /* Let the table-container flex to fill available space */
     .table-container {
+      /* Remove margin: 0 auto if it was centering the table.
+         If you want the table narrower or wider, you can set a width or max-width here. */
       flex: 1;
-      min-width: 0;
+      min-width: 0; /* allows the table to shrink if needed */
     }
+
     .scrollable-table {
-      overflow-x: auto;
+      overflow-x: auto; /* horizontal scroll if needed */
     }
+
+    /* Keep the list-container at a fixed width (or adjust as needed). */
     .list-container {
       width: 220px;
     }
+
+    /* The side buttons styling */
     .list-container ul {
       list-style: none;
       padding: 0;
@@ -32,8 +51,10 @@
 </head>
 <body class="table-page">
 <div class="container">
+  <!-- Heading remains the same -->
   <h1>Bradford Memorials</h1>
 
+  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -49,7 +70,9 @@
     </div>
   </div>
 
+  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
+    <!-- Table Container -->
     <div class="table-container">
       <div class="scrollable-table">
         <table id="dataTable">
@@ -86,6 +109,8 @@
         </table>
       </div>
     </div>
+
+    <!-- Side Buttons -->
     <div class="list-container">
       <ul>
         <li><button type="button" id="addRowBtn">Add Row</button></li>
@@ -97,8 +122,11 @@
     </div>
   </div>
 
+  <!-- Bottom Section -->
   <div class="bottom-section">
-    <div class="search-results">No of search results: <span id="searchResults">0</span></div>
+    <div class="search-results">
+      No of search results: <span id="searchResults">0</span>
+    </div>
     <div class="nav-buttons">
       <button type="button">&larr;</button>
       <button type="button">&rarr;</button>
@@ -106,7 +134,10 @@
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
+
 <script>
+  // JavaScript functionality remains exactly the same
+
   const tableBody = document.querySelector('#dataTable tbody');
   const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');
@@ -151,6 +182,7 @@
     }
     const row = selectedRadio.closest('tr');
     if (currentEditingRow === row) {
+      // Finish editing
       Array.from(row.cells).forEach((cell, index) => {
         if (index > 0) {
           cell.contentEditable = false;
@@ -160,6 +192,7 @@
       editRowBtn.textContent = "Edit Row";
       currentEditingRow = null;
     } else {
+      // Start editing a new row
       if (currentEditingRow) {
         Array.from(currentEditingRow.cells).forEach((cell, index) => {
           if (index > 0) {
@@ -203,6 +236,22 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  });
+
+  // Clear fields functionality
+  const clearFieldsBtn = document.getElementById('clearFieldsBtn');
+  const searchBtn = document.getElementById('searchBtn');
+  const forenameInput = document.getElementById('forename');
+  const surnameInput = document.getElementById('surname');
+
+  clearFieldsBtn.addEventListener('click', () => {
+    forenameInput.value = "";
+    surnameInput.value = "";
+  });
+
+  searchBtn.addEventListener('click', () => {
+    alert('Search not implemented. Forename: ' + forenameInput.value +
+            ' | Surname: ' + surnameInput.value);
   });
 </script>
 </body>
