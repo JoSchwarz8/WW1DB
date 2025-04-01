@@ -16,11 +16,11 @@
 <div class="container">
   <div class="admin-box">
     <h3>Administrators</h3>
-    <form id="loginForm">
+    <form id="loginForm" action="AdminLogin.php">
       <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Username" required>
+      <input type="text" id="username" name="adminusername" placeholder="Username" required>
       <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Password" required>
+      <input type="password" id="password" name="adminpassword" placeholder="Password" required>
       <p class="error">Incorrect password or password does not meet complexity requirements.</p>
       <button type="submit">Log In</button>
     </form>
@@ -30,9 +30,9 @@
 
   <div class="guest-box">
     <h3>Guest Login</h3>
-    <form id="guestLoginForm">
+    <form id="guestLoginForm" action="GuestLogin.php">
       <label for="guestPassword">Password</label>
-      <input type="password" id="guestPassword" placeholder="Password" required>
+      <input type="password" id="guestPassword" name="guestpassword" placeholder="Password" required>
       <p class="guest-error">Incorrect password or password does not meet complexity requirements.</p>
       <button type="submit">Log In as Guest</button>
     </form>
@@ -48,11 +48,10 @@
   const form = document.getElementById('loginForm');
   const errorMsg = document.querySelector('.error');
   // Updated correct password meets the criteria: at least 8 chars with a special character.
-  const correctPassword = 'secret@123';
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     const password = document.getElementById('password').value;
-    if (!isComplex(password) || password !== correctPassword) {
+    if (!isComplex(password)) {
       errorMsg.style.display = 'block';
     } else {
       errorMsg.style.display = 'none';
@@ -63,11 +62,10 @@
   const guestForm = document.getElementById('guestLoginForm');
   const guestError = document.querySelector('.guest-error');
   // Updated guest password meets the criteria.
-  const correctGuestPassword = 'guest@123';
   guestForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const guestPassword = document.getElementById('guestPassword').value;
-    if (!isComplex(guestPassword) || guestPassword !== correctGuestPassword) {
+    if (!isComplex(guestPassword)) {
       guestError.style.display = 'block';
     } else {
       guestError.style.display = 'none';
