@@ -66,6 +66,7 @@
 <div class="container">
   <h1>Add to Database - Those Buried in Bradford</h1>
   <form id="addRecordForm" class="form-section">
+    <!-- Input groups for each field -->
     <div class="input-group">
       <label for="surname">Surname</label>
       <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
@@ -115,11 +116,12 @@
       <input type="text" id="info" name="info" placeholder="Enter additional info">
     </div>
     <div class="form-buttons">
-      <button type="submit">Add Record</button>
-      <button type="reset">Clear Fields</button>
+      <button type="submit" id="submitBtn">Add Record</button>
+      <button type="reset" id="clearFormBtn">Clear Fields</button>
     </div>
   </form>
 
+  <!-- Optional table to display records on this page -->
   <div class="table-container">
     <table id="recordsTable">
       <thead>
@@ -139,7 +141,7 @@
       </tr>
       </thead>
       <tbody>
-      <!-- New rows will appear here -->
+      <!-- New rows will be added here if you choose not to redirect -->
       </tbody>
     </table>
   </div>
@@ -148,32 +150,35 @@
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
+
 <script>
   document.getElementById('addRecordForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const fields = [
-      document.getElementById('surname').value,
-      document.getElementById('forename').value,
-      document.getElementById('age').value,
-      document.getElementById('medals').value,
-      document.getElementById('dateOfDeath').value,
-      document.getElementById('rank').value,
-      document.getElementById('serviceNumber').value,
-      document.getElementById('regiment').value,
-      document.getElementById('unit').value,
-      document.getElementById('cemetery').value,
-      document.getElementById('graveReference').value,
-      document.getElementById('info').value
-    ];
-    const tableBody = document.querySelector('#recordsTable tbody');
-    const newRow = document.createElement('tr');
-    fields.forEach(val => {
-      const td = document.createElement('td');
-      td.textContent = val;
-      newRow.appendChild(td);
-    });
-    tableBody.appendChild(newRow);
-    this.reset();
+    const recordValues = {
+      surname: document.getElementById('surname').value,
+      forename: document.getElementById('forename').value,
+      age: document.getElementById('age').value,
+      medals: document.getElementById('medals').value,
+      dateOfDeath: document.getElementById('dateOfDeath').value,
+      rank: document.getElementById('rank').value,
+      serviceNumber: document.getElementById('serviceNumber').value,
+      regiment: document.getElementById('regiment').value,
+      unit: document.getElementById('unit').value,
+      cemetery: document.getElementById('cemetery').value,
+      graveReference: document.getElementById('graveReference').value,
+      info: document.getElementById('info').value
+    };
+    const params = new URLSearchParams();
+    params.set("newRecord", "1");
+    for (const key in recordValues) {
+      params.set(key, recordValues[key]);
+    }
+    if (confirm("Record added successfully. Would you like to view the updated Those Buried in Bradford table?")) {
+      window.location.href = "BurBrad.html?" + params.toString();
+    } else {
+      alert("Record added successfully. You can continue adding records.");
+      this.reset();
+    }
   });
 </script>
 </body>

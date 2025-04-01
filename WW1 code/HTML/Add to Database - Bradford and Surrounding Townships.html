@@ -28,33 +28,32 @@
         }
         .form-section input[type="text"],
         .form-section input[type="date"] {
+            padding: 8px 12px;
+            font-size: 0.9rem;
             border: 1px solid #ccc;
             border-radius: 4px;
-            padding: 8px 12px;
             background-color: #fff;
-            font-size: 0.9rem;
         }
         .form-buttons {
             display: flex;
             gap: 10px;
             width: 100%;
-            justify-content: flex-start;
             margin-top: 10px;
         }
-        .table-wrapper {
+        .table-container {
+            margin-top: 20px;
             overflow-x: auto;
         }
         .table-container table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
         .table-container th,
         .table-container td {
             border: 1px solid #ddd;
             padding: 6px 8px;
-            white-space: nowrap;
             font-size: 0.8rem;
+            white-space: nowrap;
         }
         .table-container thead {
             background-color: #9b111e;
@@ -66,6 +65,7 @@
 <div class="container">
     <h1>Add to Database - Bradford and Surrounding Townships</h1>
     <form id="addRecordForm" class="form-section">
+        <!-- Surrounding Towns fields -->
         <div class="input-group">
             <label for="surname">Surname</label>
             <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
@@ -163,6 +163,7 @@
             <button type="reset" id="clearFormBtn">Clear Fields</button>
         </div>
     </form>
+    <!-- Optional table to display records on the form page if needed -->
     <div class="table-container">
         <div class="table-wrapper">
             <table id="recordsTable">
@@ -194,7 +195,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- New rows will be added here -->
+                <!-- New rows will be added here if user chooses not to redirect -->
                 </tbody>
             </table>
         </div>
@@ -203,44 +204,45 @@
         <a class="back-button" href="dashboard.html">Back</a>
     </div>
 </div>
-
 <script>
     document.getElementById('addRecordForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        const recordValues = [
-            document.getElementById('surname').value,
-            document.getElementById('forename').value,
-            document.getElementById('address').value,
-            document.getElementById('electoralWard').value,
-            document.getElementById('town').value,
-            document.getElementById('rank').value,
-            document.getElementById('regiment').value,
-            document.getElementById('unit').value,
-            document.getElementById('company').value,
-            document.getElementById('age').value,
-            document.getElementById('serviceNo').value,
-            document.getElementById('otherRegiment').value,
-            document.getElementById('otherUnit').value,
-            document.getElementById('otherServiceNo').value,
-            document.getElementById('medals').value,
-            document.getElementById('enlistmentDate').value,
-            document.getElementById('dischargeDate').value,
-            document.getElementById('deathDate').value,
-            document.getElementById('miscInfoNroh').value,
-            document.getElementById('cemeteryMemorial').value,
-            document.getElementById('cemeteryMemorialRef').value,
-            document.getElementById('cemeteryMemorialCountry').value,
-            document.getElementById('additionalCWGC').value
-        ];
-        const tableBody = document.querySelector('#recordsTable tbody');
-        const newRow = document.createElement('tr');
-        recordValues.forEach(value => {
-            const cell = document.createElement('td');
-            cell.textContent = value;
-            newRow.appendChild(cell);
-        });
-        tableBody.appendChild(newRow);
-        this.reset();
+        const recordValues = {
+            surname: document.getElementById('surname').value,
+            forename: document.getElementById('forename').value,
+            address: document.getElementById('address').value,
+            electoralWard: document.getElementById('electoralWard').value,
+            town: document.getElementById('town').value,
+            rank: document.getElementById('rank').value,
+            regiment: document.getElementById('regiment').value,
+            unit: document.getElementById('unit').value,
+            company: document.getElementById('company').value,
+            age: document.getElementById('age').value,
+            serviceNo: document.getElementById('serviceNo').value,
+            otherRegiment: document.getElementById('otherRegiment').value,
+            otherUnit: document.getElementById('otherUnit').value,
+            otherServiceNo: document.getElementById('otherServiceNo').value,
+            medals: document.getElementById('medals').value,
+            enlistmentDate: document.getElementById('enlistmentDate').value,
+            dischargeDate: document.getElementById('dischargeDate').value,
+            deathDate: document.getElementById('deathDate').value,
+            miscInfoNroh: document.getElementById('miscInfoNroh').value,
+            cemeteryMemorial: document.getElementById('cemeteryMemorial').value,
+            cemeteryMemorialRef: document.getElementById('cemeteryMemorialRef').value,
+            cemeteryMemorialCountry: document.getElementById('cemeteryMemorialCountry').value,
+            additionalCWGC: document.getElementById('additionalCWGC').value
+        };
+        const params = new URLSearchParams();
+        params.set("newRecord", "1");
+        for (const key in recordValues) {
+            params.set(key, recordValues[key]);
+        }
+        if (confirm("Record added successfully. Would you like to view the updated Bradford and Surrounding Townships table?")) {
+            window.location.href = "BradSurrTowns.html?" + params.toString();
+        } else {
+            alert("Record added successfully. You can continue adding records.");
+            this.reset();
+        }
     });
 </script>
 </body>

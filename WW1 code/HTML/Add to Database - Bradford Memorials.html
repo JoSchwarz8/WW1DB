@@ -65,6 +65,7 @@
 <div class="container">
   <h1>Add to Database - Bradford Memorials</h1>
   <form id="addRecordForm" class="form-section">
+    <!-- Bradford Memorial fields -->
     <div class="input-group">
       <label for="surname">Surname</label>
       <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
@@ -110,6 +111,7 @@
       <button type="reset" id="clearFormBtn">Clear Fields</button>
     </div>
   </form>
+  <!-- Optional table to display records on this page -->
   <div class="table-container">
     <div class="table-wrapper">
       <table id="recordsTable">
@@ -128,7 +130,7 @@
         </tr>
         </thead>
         <tbody>
-        <!-- New rows will be added here -->
+        <!-- New rows will be added here if you choose not to redirect -->
         </tbody>
       </table>
     </div>
@@ -137,31 +139,32 @@
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
-
 <script>
   document.getElementById('addRecordForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const recordValues = [
-      document.getElementById('surname').value,
-      document.getElementById('forename').value,
-      document.getElementById('regiment').value,
-      document.getElementById('unit').value,
-      document.getElementById('memorial').value,
-      document.getElementById('memorialLocation').value,
-      document.getElementById('memorialInfo').value,
-      document.getElementById('memorialPostcode').value,
-      document.getElementById('district').value,
-      document.getElementById('photoAvailable').value
-    ];
-    const tableBody = document.querySelector('#recordsTable tbody');
-    const newRow = document.createElement('tr');
-    recordValues.forEach(value => {
-      const cell = document.createElement('td');
-      cell.textContent = value;
-      newRow.appendChild(cell);
-    });
-    tableBody.appendChild(newRow);
-    this.reset();
+    const recordValues = {
+      surname: document.getElementById('surname').value,
+      forename: document.getElementById('forename').value,
+      regiment: document.getElementById('regiment').value,
+      unit: document.getElementById('unit').value,
+      memorial: document.getElementById('memorial').value,
+      memorialLocation: document.getElementById('memorialLocation').value,
+      memorialInfo: document.getElementById('memorialInfo').value,
+      memorialPostcode: document.getElementById('memorialPostcode').value,
+      district: document.getElementById('district').value,
+      photoAvailable: document.getElementById('photoAvailable').value
+    };
+    const params = new URLSearchParams();
+    params.set("newRecord", "1");
+    for (const key in recordValues) {
+      params.set(key, recordValues[key]);
+    }
+    if (confirm("Record added successfully. Would you like to view the updated Bradford Memorials table?")) {
+      window.location.href = "BradMem.html?" + params.toString();
+    } else {
+      alert("Record added successfully. You can continue adding records.");
+      this.reset();
+    }
   });
 </script>
 </body>

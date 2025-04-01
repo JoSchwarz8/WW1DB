@@ -5,7 +5,7 @@
     <title>Add to Database - Newspaper Index</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Same theme as other pages */
+        /* Consistent theme styling */
         .form-section {
             background-color: #999;
             padding: 20px;
@@ -66,6 +66,7 @@
 <div class="container">
     <h1>Add to Database - Newspaper Index</h1>
     <form id="addRecordForm" class="form-section">
+        <!-- Input groups for each field -->
         <div class="input-group">
             <label for="surname">Surname</label>
             <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
@@ -108,11 +109,11 @@
         </div>
         <div class="input-group">
             <label for="photoIncl">Photo incl</label>
-            <input type="text" id="photoIncl" name="photoIncl" placeholder="Enter photo incl">
+            <input type="text" id="photoIncl" name="photoIncl" placeholder="Enter photo inclusion status">
         </div>
         <div class="form-buttons">
-            <button type="submit">Add Record</button>
-            <button type="reset">Clear Fields</button>
+            <button type="submit" id="submitBtn">Add Record</button>
+            <button type="reset" id="clearFormBtn">Clear Fields</button>
         </div>
     </form>
 
@@ -134,7 +135,7 @@
             </tr>
             </thead>
             <tbody>
-            <!-- New rows will appear here -->
+            <!-- New rows will be added here if you choose not to redirect -->
             </tbody>
         </table>
     </div>
@@ -146,28 +147,30 @@
 <script>
     document.getElementById('addRecordForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        const fields = [
-            document.getElementById('surname').value,
-            document.getElementById('forename').value,
-            document.getElementById('rank').value,
-            document.getElementById('address').value,
-            document.getElementById('regiment').value,
-            document.getElementById('unit').value,
-            document.getElementById('articleComment').value,
-            document.getElementById('newspaperName').value,
-            document.getElementById('newspaperDate').value,
-            document.getElementById('pageCol').value,
-            document.getElementById('photoIncl').value
-        ];
-        const tableBody = document.querySelector('#recordsTable tbody');
-        const newRow = document.createElement('tr');
-        fields.forEach(val => {
-            const td = document.createElement('td');
-            td.textContent = val;
-            newRow.appendChild(td);
-        });
-        tableBody.appendChild(newRow);
-        this.reset();
+        const recordValues = {
+            surname: document.getElementById('surname').value,
+            forename: document.getElementById('forename').value,
+            rank: document.getElementById('rank').value,
+            address: document.getElementById('address').value,
+            regiment: document.getElementById('regiment').value,
+            unit: document.getElementById('unit').value,
+            articleComment: document.getElementById('articleComment').value,
+            newspaperName: document.getElementById('newspaperName').value,
+            newspaperDate: document.getElementById('newspaperDate').value,
+            pageCol: document.getElementById('pageCol').value,
+            photoIncl: document.getElementById('photoIncl').value
+        };
+        const params = new URLSearchParams();
+        params.set("newRecord", "1");
+        for (const key in recordValues) {
+            params.set(key, recordValues[key]);
+        }
+        if (confirm("Record added successfully. Would you like to view the updated Newspaper Index table?")) {
+            window.location.href = "NewsRefs.html?" + params.toString();
+        } else {
+            alert("Record added successfully. You can continue adding records.");
+            this.reset();
+        }
     });
 </script>
 </body>
