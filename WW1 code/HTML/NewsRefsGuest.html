@@ -5,13 +5,8 @@
   <title>Newspaper index</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .table-container {
-      flex: 1;
-      min-width: 0;
-    }
-    .scrollable-table {
-      overflow-x: auto;
-    }
+    .table-container { flex: 1; min-width: 0; }
+    .scrollable-table { overflow-x: auto; }
   </style>
 </head>
 <body class="table-page">
@@ -88,11 +83,58 @@
   document.getElementById('searchBtn').addEventListener('click', () => {
     alert('Search functionality not implemented.');
   });
-  document.getElementById('prevBtn').addEventListener('click', () => {
-    alert('Previous page not implemented.');
+
+  let currentPage = 1, rowsPerPage = 6;
+  const tableBody = document.querySelector('#dataTable tbody');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  function updateTablePagination() {
+    const rows = Array.from(tableBody.getElementsByTagName('tr'));
+    const totalRows = rows.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    rows.forEach((row, index) => {
+      row.style.display = (index >= (currentPage-1)*rowsPerPage && index < currentPage*rowsPerPage) ? "" : "none";
+    });
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+    document.getElementById('resultsCount').textContent = totalRows;
+  }
+  prevBtn.addEventListener('click', () => { if(currentPage > 1){ currentPage--; updateTablePagination(); }});
+  nextBtn.addEventListener('click', () => {
+    const totalRows = tableBody.getElementsByTagName('tr').length;
+    const totalPages = Math.ceil(totalRows/rowsPerPage) || 1;
+    if(currentPage < totalPages){ currentPage++; updateTablePagination(); }
   });
-  document.getElementById('nextBtn').addEventListener('click', () => {
-    alert('Next page not implemented.');
+  updateTablePagination();
+
+  // Process query parameters to add new record if present.
+  function getQueryParams() {
+    const params = {};
+    window.location.search.substring(1).split("&").forEach(pair => {
+      const [key, value] = pair.split("=");
+      if(key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+    });
+    return params;
+  }
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = getQueryParams();
+    if(params.newRecord === "1") {
+      const newRow = document.createElement('tr');
+      const radioCell = document.createElement('td');
+      radioCell.innerHTML = '<input type="radio" name="recordSelect">';
+      newRow.appendChild(radioCell);
+      const fields = ["surname", "forename", "rank", "address", "regiment", "unit", "articleComment", "newspaperName", "newspaperDate", "pageCol", "photoIncl"];
+      fields.forEach(field => {
+        const cell = document.createElement('td');
+        cell.textContent = params[field] || "";
+        newRow.appendChild(cell);
+      });
+      tableBody.appendChild(newRow);
+      window.history.replaceState({}, document.title, window.location.pathname);
+      updateTablePagination();
+    }
   });
 </script>
 </body>

@@ -5,6 +5,7 @@
   <title>Biographies</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Your existing styles */
     .table-container {
       flex: 1;
       min-width: 0;
@@ -26,6 +27,10 @@
     .list-container button {
       width: 100%;
       padding: 10px;
+      font-size: 1rem;
+    }
+    .nav-buttons button {
+      padding: 5px 10px;
       font-size: 1rem;
     }
   </style>
@@ -76,9 +81,10 @@
         </table>
       </div>
     </div>
+    <!-- Side buttons; note the Add Row button now redirects to the form page -->
     <div class="list-container">
       <ul>
-        <li><button type="button" id="addRowBtn">Add Row</button></li>
+        <li><button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Biographies.html'">Add Row</button></li>
         <li><button type="button" id="deleteRowBtn">Delete Row</button></li>
         <li><button type="button" id="editRowBtn">Edit Row</button></li>
         <li><button type="button" id="importBtn">Import</button></li>
@@ -90,35 +96,39 @@
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="searchResults">0</span></div>
     <div class="nav-buttons">
-      <button type="button">&larr;</button>
-      <button type="button">&rarr;</button>
+      <button type="button" id="prevPageBtn">&larr;</button>
+      <button type="button" id="nextPageBtn">&rarr;</button>
     </div>
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
 
 <script>
+  // Existing functionality for Delete, Edit, Import, Export, and Pagination remains
   const tableBody = document.querySelector('#dataTable tbody');
-  const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');
   const editRowBtn = document.getElementById('editRowBtn');
   const importBtn = document.getElementById('importBtn');
   const exportBtn = document.getElementById('exportBtn');
+  const prevPageBtn = document.getElementById('prevPageBtn');
+  const nextPageBtn = document.getElementById('nextPageBtn');
   let currentEditingRow = null;
   const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
+  let currentPage = 1;
+  const rowsPerPage = 6;
 
-  addRowBtn.addEventListener('click', () => {
-    const newRow = document.createElement('tr');
-    const radioCell = document.createElement('td');
-    radioCell.innerHTML = '<input type="radio" name="recordSelect">';
-    newRow.appendChild(radioCell);
-    for (let i = 0; i < columnCount; i++) {
-      const cell = document.createElement('td');
-      cell.textContent = '';
-      newRow.appendChild(cell);
-    }
-    tableBody.appendChild(newRow);
-  });
+  function updateTablePagination() {
+    const rows = Array.from(tableBody.getElementsByTagName('tr'));
+    const totalRows = rows.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+    if (currentPage > totalPages) { currentPage = totalPages; }
+    rows.forEach((row, index) => {
+      row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
+    });
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+    document.getElementById('searchResults').textContent = totalRows;
+  }
 
   deleteRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
@@ -129,6 +139,10 @@
         editRowBtn.textContent = "Edit Row";
       }
       row.remove();
+      const totalRows = tableBody.getElementsByTagName('tr').length;
+      const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+      if ((currentPage - 1) * rowsPerPage >= totalRows) { currentPage = totalPages; }
+      updateTablePagination();
     } else {
       alert('Please select a row to delete.');
     }
@@ -194,6 +208,55 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  });
+
+  prevPageBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateTablePagination();
+    }
+  });
+
+  nextPageBtn.addEventListener('click', () => {
+    const totalRows = tableBody.getElementsByTagName('tr').length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+    if (currentPage < totalPages) {
+      currentPage++;
+      updateTablePagination();
+    }
+  });
+
+  updateTablePagination();
+
+  // Process query parameters from the Add to Database form
+  function getQueryParams() {
+    const params = {};
+    window.location.search.substring(1).split("&").forEach(pair => {
+      const [key, value] = pair.split("=");
+      if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+    });
+    return params;
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = getQueryParams();
+    if (params.newRecord === "1") {
+      // Expected parameters: surname, forename, regiment, serviceNo, bioAttachment
+      const newRow = document.createElement('tr');
+      const radioCell = document.createElement('td');
+      radioCell.innerHTML = '<input type="radio" name="recordSelect">';
+      newRow.appendChild(radioCell);
+      const fields = ["surname", "forename", "regiment", "serviceNo", "bioAttachment"];
+      fields.forEach(field => {
+        const cell = document.createElement('td');
+        cell.textContent = params[field] || "";
+        newRow.appendChild(cell);
+      });
+      tableBody.appendChild(newRow);
+      // Clear the query string so the record is not added again on refresh
+      window.history.replaceState({}, document.title, window.location.pathname);
+      updateTablePagination();
+    }
   });
 </script>
 </body>
