@@ -102,7 +102,7 @@ $result = display_Memorials();   // Calls function to retrieve memorial records
         <!-- Side buttons -->
         <div class="list-container">
             <ul>
-                <li><button type="button" id="addRowBtn">Add Row</button></li>
+                <li><button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Bradford Memorials.html'">Add Row</button></li>
                 <li><button type="button" id="deleteRowBtn">Delete Row</button></li>
                 <li><button type="button" id="editRowBtn">Edit Row</button></li>
                 <li><button type="button" id="importBtn">Import</button></li>

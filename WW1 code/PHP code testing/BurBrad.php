@@ -92,7 +92,7 @@ $result = display_Burials(); // Calls on function to fill rows
         <!-- Side buttons remain (Add/Delete/Edit/Import/Export) -->
         <div class="list-container">
             <ul>
-                <li><button type="button" id="addRowBtn">Add Row</button></li>
+                <li><button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Those Buried in Bradford.html'">Add Row</button></li>
                 <li><button type="button" id="deleteRowBtn">Delete Row</button></li>
                 <li><button type="button" id="editRowBtn">Edit Row</button></li>
                 <li><button type="button" id="importBtn">Import</button></li>
