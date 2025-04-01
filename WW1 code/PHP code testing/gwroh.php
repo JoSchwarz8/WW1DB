@@ -1,8 +1,14 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
+
+<?php
 require_once 'config/DBconnect.php';  // Database connection
 require_once 'config/function.php'; // Function file
 $result = display_gwroh(); // Calls on function to fill rows
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
