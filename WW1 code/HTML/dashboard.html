@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Database Selection</title>
-  <!-- Link to the updated stylesheet for basic resets, etc. -->
-  <link rel="stylesheet" href="styles.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Database Selection</title>
+<!-- Link to the updated stylesheet for basic resets, etc. -->
+<link href="styles.css" rel="stylesheet"/>
+<style>
     /* Keep your existing background and card styles here */
     body {
       font-family: Arial, sans-serif;
@@ -81,33 +82,76 @@
 </head>
 <body>
 <div class="container">
-  <h1>Please select a database</h1>
-  <div class="grid">
-    <div class="card">
-      <h2>Bradford and surrounding townships</h2>
-      <a href="BradSurrTowns.html"><button>About</button></a>
-    </div>
-    <div class="card">
-      <h2>Names on Bradford Memorials</h2>
-      <a href="BradMem.html"><button>About</button></a>
-    </div>
-    <div class="card">
-      <h2>Buried in Bradford</h2>
-      <a href="BurBrad.html"><button>About</button></a>
-    </div>
-    <div class="card">
-      <h2>Newspaper References</h2>
-      <a href="NewsRefs.html"><button>About</button></a>
-    </div>
-    <div class="card">
-      <h2>Biographies</h2>
-      <a href="Bios.html"><button>About</button></a>
-    </div>
-  </div>
-  <a href="index.html">
-    <button class="logout-btn">Log off</button>
-  </a>
+<h1>Please select a database</h1>
+<div class="grid">
+<div class="card">
+<h2>Bradford and surrounding townships</h2>
+<a href="BradSurrTowns.html"><button>About</button></a>
+</div>
+<div class="card">
+<h2>Names on Bradford Memorials</h2>
+<a href="BradMem.html"><button>About</button></a>
+</div>
+<div class="card">
+<h2>Buried in Bradford</h2>
+<a href="BurBrad.html"><button>About</button></a>
+</div>
+<div class="card">
+<h2>Newspaper References</h2>
+<a href="NewsRefs.html"><button>About</button></a>
+</div>
+<div class="card">
+<h2>Biographies</h2>
+<a href="Bios.html"><button>About</button></a>
+</div>
+</div>
+<button class="logout-btn" id="logoutBtn">Log off</button>
 </div>
 <script src="WW1 code\lockdown.js"></script>
+
+
+<script>
+  let lockdownActive = true;
+  let navigatingInternally = false;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Handle internal link clicks
+    document.querySelectorAll("a").forEach(anchor => {
+      anchor.addEventListener("click", () => {
+        navigatingInternally = true;
+      });
+    });
+
+    // Lock keys while lockdown is active
+    document.addEventListener("keydown", function(e) {
+      if (lockdownActive && (["Escape", "F11", "F12"].includes(e.key) || e.ctrlKey || e.altKey || e.metaKey)) {
+        e.preventDefault();
+        alert("This system is in lockdown. Please use the Log off button.");
+      }
+    });
+
+    // Disable right-click
+    window.addEventListener("contextmenu", function(e) {
+      if (lockdownActive) e.preventDefault();
+    });
+
+    // Suppress blur warning if it's due to internal nav
+    window.onblur = () => {
+      if (lockdownActive && !navigatingInternally) {
+        alert("Focus lost. Returning to lockdown.");
+        window.focus();
+      }
+    };
+
+    // Logout ends lockdown and redirects to login
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", function() {
+        lockdownActive = false;
+        window.location.href = "index.html";
+      });
+    }
+  });
+</script>
 </body>
 </html>
