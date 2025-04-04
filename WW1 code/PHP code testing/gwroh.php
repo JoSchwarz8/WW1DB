@@ -16,7 +16,6 @@ $result = display_gwroh(); // Calls on function to fill rows
     <title>Bradford and surrounding townships</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Container and table styling */
         .table-container { flex: 1; min-width: 0; }
         .scrollable-table { overflow-x: auto; }
         .list-container { width: 220px; }
@@ -29,7 +28,6 @@ $result = display_gwroh(); // Calls on function to fill rows
 <body class="table-page">
 <div class="container">
     <h1>Bradford and surrounding townships</h1>
-
     <!-- Search Row -->
     <div class="search-row">
         <div class="input-group">
@@ -41,11 +39,10 @@ $result = display_gwroh(); // Calls on function to fill rows
             <input type="text" id="surname" placeholder="Enter surname">
         </div>
         <div class="search-buttons">
-            <button type="button">Clear fields</button>
-            <button type="button">Search</button>
+            <button type="button" id="clearFieldsBtn">Clear fields</button>
+            <button type="button" id="searchBtn">Search</button>
         </div>
     </div>
-
     <!-- Main Content: Table and Side Buttons -->
     <div class="main-content">
         <div class="table-container">
@@ -93,19 +90,19 @@ $result = display_gwroh(); // Calls on function to fill rows
                             <td><?php echo $row['Battalion']; ?></td>
                             <td><?php echo $row['Company']; ?></td>
                             <td><?php echo $row['DoB']; ?></td>
-                            <td><?php echo $row['Service no']; ?></td>
+                            <td><?php echo $row['Service No.']; ?></td>
                             <td><?php echo $row['Other Regiment']; ?></td>
                             <td><?php echo $row['Other Unit']; ?></td>
-                            <td><?php echo $row['Other Service no']; ?></td>
+                            <td><?php echo $row['Other Service No.']; ?></td>
                             <td><?php echo $row['Medals']; ?></td>
                             <td><?php echo $row['Enlistment date']; ?></td>
                             <td><?php echo $row['Discharge date']; ?></td>
-                            <td><?php echo $row['Death (in service) Date']; ?></td>
-                            <td><?php echo $row['Misc info (Nroh)']; ?></td>
-                            <td><?php echo $row['Misc info (cwgc)']; ?></td>
+                            <td><?php echo $row['Death (in service) date']; ?></td>
+                            <td><?php echo $row['Misc Info Nroh']; ?></td>
                             <td><?php echo $row['Cemetery/Memorial']; ?></td>
                             <td><?php echo $row['Cemetery/Memorial Ref']; ?></td>
                             <td><?php echo $row['Cemetery/Memorial Country']; ?></td>
+                            <td><?php echo $row['Additional CWGC info']; ?></td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -116,7 +113,6 @@ $result = display_gwroh(); // Calls on function to fill rows
         <div class="list-container">
             <ul>
                 <li>
-                    <!-- Redirects to a dedicated page for adding a new database record -->
                     <button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Bradford and Surrounding Townships.html'">
                         Add Row
                     </button>
@@ -128,12 +124,9 @@ $result = display_gwroh(); // Calls on function to fill rows
             </ul>
         </div>
     </div>
-
-    <!-- Bottom section: search results, navigation buttons, and back link -->
+    <!-- Bottom Section -->
     <div class="bottom-section">
-        <div class="search-results">
-            No of search results: <span id="searchResults">0</span>
-        </div>
+        <div class="search-results">No of search results: <span id="searchResults">0</span></div>
         <div class="nav-buttons">
             <button type="button" id="prevPageBtn">&larr;</button>
             <button type="button" id="nextPageBtn">&rarr;</button>
@@ -141,17 +134,57 @@ $result = display_gwroh(); // Calls on function to fill rows
         <a class="back-button" href="dashboard.html">Back</a>
     </div>
 </div>
+
+<!-- JavaScript for Search and Clear Fields -->
 <script>
+    const forenameInput = document.getElementById('forename');
+    const surnameInput = document.getElementById('surname');
+    const clearFieldsBtn = document.getElementById('clearFieldsBtn');
+    const searchBtn = document.getElementById('searchBtn');
     const tableBody = document.querySelector('#dataTable tbody');
-    const addRowBtn = document.getElementById('addRowBtn');
+
+    clearFieldsBtn.addEventListener('click', function() {
+        forenameInput.value = "";
+        surnameInput.value = "";
+        const rows = tableBody.getElementsByTagName('tr');
+        for (let row of rows) {
+            row.style.display = "";
+        }
+        document.getElementById('searchResults').textContent = rows.length;
+    });
+
+    searchBtn.addEventListener('click', function() {
+        const forenameSearch = forenameInput.value.trim().toLowerCase();
+        const surnameSearch = surnameInput.value.trim().toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+        let visibleCount = 0;
+        for (let row of rows) {
+            const surnameCell = row.cells[1].textContent.toLowerCase();
+            const forenameCell = row.cells[2].textContent.toLowerCase();
+            if ((surnameSearch === "" || surnameCell.includes(surnameSearch)) &&
+                (forenameSearch === "" || forenameCell.includes(forenameSearch))) {
+                row.style.display = "";
+                visibleCount++;
+            } else {
+                row.style.display = "none";
+            }
+        }
+        document.getElementById('searchResults').textContent = visibleCount;
+    });
+</script>
+
+<script>
+    // Side button functionality and pagination
     const deleteRowBtn = document.getElementById('deleteRowBtn');
     const editRowBtn = document.getElementById('editRowBtn');
     const importBtn = document.getElementById('importBtn');
     const exportBtn = document.getElementById('exportBtn');
+
     let currentEditingRow = null;
     const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
 
-    // Event listener for adding a new row (client-side addition and pagination update)
+    // Add Row functionality (for client-side addition)
+    const addRowBtn = document.getElementById('addRowBtn');
     addRowBtn.addEventListener('click', () => {
         const newRow = document.createElement('tr');
         const radioCell = document.createElement('td');
@@ -163,7 +196,6 @@ $result = display_gwroh(); // Calls on function to fill rows
             newRow.appendChild(cell);
         }
         tableBody.appendChild(newRow);
-        // After adding, navigate to the last page so that the new row is visible.
         const rows = Array.from(tableBody.getElementsByTagName('tr'));
         const totalRows = rows.length;
         const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
@@ -171,7 +203,6 @@ $result = display_gwroh(); // Calls on function to fill rows
         updateTablePagination();
     });
 
-    // Delete row functionality
     deleteRowBtn.addEventListener('click', () => {
         const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
         if (selectedRadio) {
@@ -187,7 +218,6 @@ $result = display_gwroh(); // Calls on function to fill rows
         }
     });
 
-    // Edit/Save row functionality
     editRowBtn.addEventListener('click', () => {
         const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
         if (!selectedRadio) {
@@ -224,12 +254,10 @@ $result = display_gwroh(); // Calls on function to fill rows
         }
     });
 
-    // Import button (not implemented)
     importBtn.addEventListener('click', () => {
         alert('Import functionality not implemented.');
     });
 
-    // Export table data to CSV
     exportBtn.addEventListener('click', () => {
         let csvContent = "";
         const rows = document.querySelectorAll("#dataTable tr");
@@ -272,24 +300,18 @@ $result = display_gwroh(); // Calls on function to fill rows
     }
 
     prevPageBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            updateTablePagination();
-        }
+        if (currentPage > 1) { currentPage--; updateTablePagination(); }
     });
 
     nextPageBtn.addEventListener('click', () => {
         const totalRows = tableBody.getElementsByTagName('tr').length;
         const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-        if (currentPage < totalPages) {
-            currentPage++;
-            updateTablePagination();
-        }
+        if (currentPage < totalPages) { currentPage++; updateTablePagination(); }
     });
 
     updateTablePagination();
 
-    // Process query parameters for adding a new record (if redirected from the Add Record form).
+    // Process query parameters from the Add to Database form.
     function getQueryParams() {
         const params = {};
         window.location.search.substring(1).split("&").forEach(pair => {
@@ -306,7 +328,7 @@ $result = display_gwroh(); // Calls on function to fill rows
             const radioCell = document.createElement('td');
             radioCell.innerHTML = '<input type="radio" name="recordSelect">';
             newRow.appendChild(radioCell);
-            // Expected fields: surname, forename, address, electoralWard, town, rank, regiment, unit, company, age, serviceNo, otherRegiment, otherUnit, otherServiceNo, medals, enlistmentDate, dischargeDate, deathDate, miscInfoNroh, cemeteryMemorial, cemeteryMemorialRef, cemeteryMemorialCountry, additionalCWGC
+            // Use the updated field names from the Add to Database form.
             const fields = ["surname", "forename", "address", "electoralWard", "town", "rank", "regiment", "unit", "company", "age", "serviceNo", "otherRegiment", "otherUnit", "otherServiceNo", "medals", "enlistmentDate", "dischargeDate", "deathDate", "miscInfoNroh", "cemeteryMemorial", "cemeteryMemorialRef", "cemeteryMemorialCountry", "additionalCWGC"];
             fields.forEach(field => {
                 const cell = document.createElement('td');

@@ -24,7 +24,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
 <body class="table-page">
 <div class="container">
     <h1>Newspaper index</h1>
-    <!-- Search Row -->
     <div class="search-row">
         <div class="input-group">
             <label for="forename">Forename:</label>
@@ -39,7 +38,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
             <button type="button" id="searchBtn">Search</button>
         </div>
     </div>
-    <!-- Main Content: Table and Side Buttons -->
     <div class="main-content">
         <div class="table-container">
             <div class="table-wrapper">
@@ -57,7 +55,7 @@ $result = display_NewsRefs();    // Calls on function to fill rows
                         <th>Newspaper Name</th>
                         <th>Newspaper Date</th>
                         <th>Page/Col</th>
-                        <th>Photo incl.</th>
+                        <th>Photo incl</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,7 +79,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
                 </table>
             </div>
         </div>
-        <!-- Side Buttons -->
         <div class="list-container">
             <ul>
                 <li>
@@ -96,7 +93,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
             </ul>
         </div>
     </div>
-    <!-- Bottom Section: Pagination and Back Button -->
     <div class="bottom-section">
         <div class="search-results">No of search results: <span id="resultsCount">0</span></div>
         <div class="nav-buttons">
@@ -106,8 +102,46 @@ $result = display_NewsRefs();    // Calls on function to fill rows
         <a class="back-button" href="dashboard.html">Back</a>
     </div>
 </div>
+
+<!-- JavaScript for Search and Clear Fields -->
 <script>
+    const forenameInput = document.getElementById('forename');
+    const surnameInput = document.getElementById('surname');
+    const clearBtn = document.getElementById('clearBtn');
+    const searchBtn = document.getElementById('searchBtn');
     const tableBody = document.querySelector('#dataTable tbody');
+
+    clearBtn.addEventListener('click', function() {
+        forenameInput.value = "";
+        surnameInput.value = "";
+        const rows = tableBody.getElementsByTagName('tr');
+        for (let row of rows) {
+            row.style.display = "";
+        }
+        document.getElementById('resultsCount').textContent = rows.length;
+    });
+
+    searchBtn.addEventListener('click', function() {
+        const forenameSearch = forenameInput.value.trim().toLowerCase();
+        const surnameSearch = surnameInput.value.trim().toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+        let visibleCount = 0;
+        for (let row of rows) {
+            const surnameCell = row.cells[1].textContent.toLowerCase();
+            const forenameCell = row.cells[2].textContent.toLowerCase();
+            if ((surnameSearch === "" || surnameCell.includes(surnameSearch)) &&
+                (forenameSearch === "" || forenameCell.includes(forenameSearch))) {
+                row.style.display = "";
+                visibleCount++;
+            } else {
+                row.style.display = "none";
+            }
+        }
+        document.getElementById('resultsCount').textContent = visibleCount;
+    });
+</script>
+
+<script>
     const addRowBtn = document.getElementById('addRowBtn');
     const deleteRowBtn = document.getElementById('deleteRowBtn');
     const editRowBtn = document.getElementById('editRowBtn');
@@ -207,24 +241,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
         document.body.removeChild(link);
     });
 
-    document.getElementById('clearBtn').addEventListener('click', () => {
-        document.getElementById('forename').value = '';
-        document.getElementById('surname').value = '';
-    });
-
-    document.getElementById('searchBtn').addEventListener('click', () => {
-        alert('Search functionality not implemented.');
-    });
-
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        alert('Previous page not implemented.');
-    });
-
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        alert('Next page not implemented.');
-    });
-
-    // Pagination: display 6 rows per page.
     let currentPage = 1;
     const rowsPerPage = 6;
     const prevBtn = document.getElementById('prevBtn');
@@ -255,7 +271,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
 
     updateTablePagination();
 
-    // Process query parameters and add a new row if present.
     function getQueryParams() {
         const params = {};
         window.location.search.substring(1).split("&").forEach(pair => {
@@ -264,6 +279,7 @@ $result = display_NewsRefs();    // Calls on function to fill rows
         });
         return params;
     }
+
     window.addEventListener("DOMContentLoaded", () => {
         const params = getQueryParams();
         if (params.newRecord === "1") {
@@ -279,7 +295,6 @@ $result = display_NewsRefs();    // Calls on function to fill rows
             });
             tableBody.appendChild(newRow);
             window.history.replaceState({}, document.title, window.location.pathname);
-            // Set to last page so the new record is visible.
             const rows = Array.from(tableBody.getElementsByTagName('tr'));
             const totalPages = Math.ceil(rows.length / rowsPerPage) || 1;
             currentPage = totalPages;

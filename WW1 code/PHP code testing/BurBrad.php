@@ -1,12 +1,10 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-?>
 
-<?php
 require_once 'DBconnect.php';  // Database connection
-require_once 'function.php'; // Function file
-$result = display_Burials(); // Calls on function to fill rows
+require_once 'function.php';     // Function file
+$result = display_Burials();     // Calls on function to fill rows
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +13,6 @@ $result = display_Burials(); // Calls on function to fill rows
     <title>Those buried in Bradford</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Using styles from BurBrad.html */
         .table-container { flex: 1; min-width: 0; }
         .scrollable-table { overflow-x: auto; }
         .list-container { width: 220px; }
@@ -89,7 +86,7 @@ $result = display_Burials(); // Calls on function to fill rows
                 </table>
             </div>
         </div>
-        <!-- Side buttons remain (Add/Delete/Edit/Import/Export) -->
+        <!-- Side buttons -->
         <div class="list-container">
             <ul>
                 <li><button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Those Buried in Bradford.html'">Add Row</button></li>
@@ -103,29 +100,69 @@ $result = display_Burials(); // Calls on function to fill rows
     <div class="bottom-section">
         <div class="search-results">No of search results: <span id="searchResults">0</span></div>
         <div class="nav-buttons">
-            <button type="button" id="prevBtn">&larr;</button>
-            <button type="button" id="nextBtn">&rarr;</button>
+            <button type="button" id="prevPageBtn">&larr;</button>
+            <button type="button" id="nextPageBtn">&rarr;</button>
         </div>
         <a class="back-button" href="dashboard.html">Back</a>
     </div>
 </div>
+
+<!-- JavaScript for Search and Clear Fields -->
 <script>
-    // Clear and search functionality
-    document.getElementById('clearFieldsBtn').addEventListener('click', () => {
-        document.getElementById('forename').value = '';
-        document.getElementById('surname').value = '';
-        document.getElementById('cemetery').value = '';
-    });
-    document.getElementById('searchBtn').addEventListener('click', () => {
-        alert('Search functionality not implemented.');
+    // Get references to the search inputs and buttons
+    const forenameInput = document.getElementById('forename');
+    const surnameInput = document.getElementById('surname');
+    const cemeteryInput = document.getElementById('cemetery');
+    const clearFieldsBtn = document.getElementById('clearFieldsBtn');
+    const searchBtn = document.getElementById('searchBtn');
+    // Reference to the table body
+    const tableBody = document.querySelector('#dataTable tbody');
+
+    // Clear Fields: Empties search inputs and resets table row visibility
+    clearFieldsBtn.addEventListener('click', function() {
+        forenameInput.value = "";
+        surnameInput.value = "";
+        cemeteryInput.value = "";
+        const rows = tableBody.getElementsByTagName('tr');
+        for (let row of rows) {
+            row.style.display = "";
+        }
+        document.getElementById('searchResults').textContent = rows.length;
     });
 
-    // Pagination functionality
+    // Search functionality: Filters rows based on forename, surname, and cemetery
+    searchBtn.addEventListener('click', function() {
+        const forenameSearch = forenameInput.value.trim().toLowerCase();
+        const surnameSearch = surnameInput.value.trim().toLowerCase();
+        const cemeterySearch = cemeteryInput.value.trim().toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+        let visibleCount = 0;
+        for (let row of rows) {
+            const surnameCell = row.cells[1].textContent.toLowerCase();
+            const forenameCell = row.cells[2].textContent.toLowerCase();
+            const cemeteryCell = row.cells[10].textContent.toLowerCase();
+            if ((surnameSearch === "" || surnameCell.includes(surnameSearch)) &&
+                (forenameSearch === "" || forenameCell.includes(forenameSearch)) &&
+                (cemeterySearch === "" || cemeteryCell.includes(cemeterySearch))) {
+                row.style.display = "";
+                visibleCount++;
+            } else {
+                row.style.display = "none";
+            }
+        }
+        document.getElementById('searchResults').textContent = visibleCount;
+    });
+</script>
+
+<script>
+    // Side button functionality and pagination
+    const deleteRowBtn = document.getElementById('deleteRowBtn');
+    const editRowBtn = document.getElementById('editRowBtn');
+    const importBtn = document.getElementById('importBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    let currentEditingRow = null;
     let currentPage = 1;
     const rowsPerPage = 6;
-    const tableBody = document.querySelector('#dataTable tbody');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
 
     function updateTablePagination() {
         const rows = Array.from(tableBody.getElementsByTagName('tr'));
@@ -135,30 +172,10 @@ $result = display_Burials(); // Calls on function to fill rows
         rows.forEach((row, index) => {
             row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
         });
-        prevBtn.disabled = currentPage === 1;
-        nextBtn.disabled = currentPage === totalPages;
         document.getElementById('searchResults').textContent = totalRows;
+        document.getElementById('prevPageBtn').disabled = currentPage === 1;
+        document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
     }
-
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 1) { currentPage--; updateTablePagination(); }
-    });
-
-    nextBtn.addEventListener('click', () => {
-        const totalRows = tableBody.getElementsByTagName('tr').length;
-        const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-        if (currentPage < totalPages) { currentPage++; updateTablePagination(); }
-    });
-
-    updateTablePagination();
-
-    // Optionally, add side button functionality (Delete, Edit, Import, Export) if needed.
-    const deleteRowBtn = document.getElementById('deleteRowBtn');
-    const editRowBtn = document.getElementById('editRowBtn');
-    const importBtn = document.getElementById('importBtn');
-    const exportBtn = document.getElementById('exportBtn');
-    let currentEditingRow = null;
-    const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
 
     deleteRowBtn.addEventListener('click', () => {
         const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
@@ -235,6 +252,54 @@ $result = display_Burials(); // Calls on function to fill rows
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    });
+
+    document.getElementById('prevPageBtn').addEventListener('click', () => {
+        if (currentPage > 1) { currentPage--; updateTablePagination(); }
+    });
+
+    document.getElementById('nextPageBtn').addEventListener('click', () => {
+        const totalRows = tableBody.getElementsByTagName('tr').length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+        if (currentPage < totalPages) { currentPage++; updateTablePagination(); }
+    });
+
+    updateTablePagination();
+
+    // Process query parameters and add a new row if present.
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(pair => {
+            const [key, value] = pair.split("=");
+            if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+        });
+        return params;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const params = getQueryParams();
+        if (params.newRecord === "1") {
+            const newRow = document.createElement('tr');
+            const radioCell = document.createElement('td');
+            radioCell.innerHTML = '<input type="radio" name="recordSelect">';
+            newRow.appendChild(radioCell);
+            // Fields matching the Add form: surname, forename, age, medals, dateOfDeath, rank, serviceNumber, regiment, unit, cemetery, graveReference, info.
+            const fields = ["surname", "forename", "age", "medals", "dateOfDeath", "rank", "serviceNumber", "regiment", "unit", "cemetery", "graveReference", "info"];
+            fields.forEach(field => {
+                const cell = document.createElement('td');
+                cell.textContent = params[field] || "";
+                newRow.appendChild(cell);
+            });
+            tableBody.appendChild(newRow);
+            // Set current page to the last page so the new record is visible.
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+            const totalRows = rows.length;
+            const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+            currentPage = totalPages;
+            updateTablePagination();
+            // Clear the query string so the record is not added again on refresh.
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
     });
 </script>
 </body>
