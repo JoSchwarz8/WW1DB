@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "start": "servor --reload"
-  },
-  "dependencies": {
-    "servor": "^4.0.2"
+  "start": "electron .",
+  "build": "electron-packager . WW1App --platform=win32 --arch=x64 --out=dist --overwrite"
+},
+  "devDependencies": {
+    "electron": "^25.3.1"
   }
 }
