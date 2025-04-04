@@ -1,14 +1,11 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-?>
 
-<?php
 require_once 'DBconnect.php';  // Database connection
 require_once 'function.php'; // Function file
 $result = display_Bios(); // Calls function to retrieve the rows
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +13,7 @@ $result = display_Bios(); // Calls function to retrieve the rows
     <title>Biographies</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Your existing styles */
         .table-container {
             flex: 1;
             min-width: 0;
@@ -39,7 +37,6 @@ $result = display_Bios(); // Calls function to retrieve the rows
             padding: 10px;
             font-size: 1rem;
         }
-        /* Pagination buttons styling */
         .nav-buttons button {
             padding: 5px 10px;
             font-size: 1rem;
@@ -50,6 +47,7 @@ $result = display_Bios(); // Calls function to retrieve the rows
 <div class="container">
     <h1>Biographies</h1>
 
+    <!-- Search Row -->
     <div class="search-row">
         <div class="input-group">
             <label for="forename">Forename:</label>
@@ -60,11 +58,12 @@ $result = display_Bios(); // Calls function to retrieve the rows
             <input type="text" id="surname" placeholder="Enter surname">
         </div>
         <div class="search-buttons">
-            <button type="button">Clear fields</button>
-            <button type="button">Search</button>
+            <button type="button" id="clearFieldsBtn">Clear fields</button>
+            <button type="button" id="searchBtn">Search</button>
         </div>
     </div>
 
+    <!-- Main Content: Table and Side Buttons -->
     <div class="main-content">
         <div class="table-container">
             <div class="scrollable-table">
@@ -94,6 +93,7 @@ $result = display_Bios(); // Calls function to retrieve the rows
                 </table>
             </div>
         </div>
+        <!-- Side buttons; note the Add Row button now redirects to the form page -->
         <div class="list-container">
             <ul>
                 <li><button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Biographies.html'">Add Row</button></li>
@@ -105,6 +105,7 @@ $result = display_Bios(); // Calls function to retrieve the rows
         </div>
     </div>
 
+    <!-- Bottom Section: Pagination and Back Button -->
     <div class="bottom-section">
         <div class="search-results">No of search results: <span id="searchResults">0</span></div>
         <div class="nav-buttons">
@@ -115,13 +116,59 @@ $result = display_Bios(); // Calls function to retrieve the rows
     </div>
 </div>
 
+<!-- JavaScript for Search and Clear Fields -->
 <script>
-    // --- Pagination Code ---
-    let currentPage = 1;
-    const rowsPerPage = 6;
+    // Get references to the search inputs and buttons
+    const forenameInput = document.getElementById('forename');
+    const surnameInput = document.getElementById('surname');
+    const clearFieldsBtn = document.getElementById('clearFieldsBtn');
+    const searchBtn = document.getElementById('searchBtn');
+    // Reference to the table body
     const tableBody = document.querySelector('#dataTable tbody');
+
+    // Clear Fields: Empties search inputs and shows all rows without reloading the page
+    clearFieldsBtn.addEventListener('click', function() {
+        forenameInput.value = "";
+        surnameInput.value = "";
+        const rows = tableBody.getElementsByTagName('tr');
+        for (let row of rows) {
+            row.style.display = "";
+        }
+        document.getElementById('searchResults').textContent = rows.length;
+    });
+
+    searchBtn.addEventListener('click', function() {
+        const forenameSearch = forenameInput.value.trim().toLowerCase();
+        const surnameSearch = surnameInput.value.trim().toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+        let visibleCount = 0;
+        for (let row of rows) {
+            const surnameCell = row.cells[1].textContent.toLowerCase();
+            const forenameCell = row.cells[2].textContent.toLowerCase();
+            if ((surnameSearch === "" || surnameCell.includes(surnameSearch)) &&
+                (forenameSearch === "" || forenameCell.includes(forenameSearch))) {
+                row.style.display = "";
+                visibleCount++;
+            } else {
+                row.style.display = "none";
+            }
+        }
+        document.getElementById('searchResults').textContent = visibleCount;
+    });
+</script>
+
+<!-- Existing functionality for Delete, Edit, Import, Export, and Pagination -->
+<script>
+    const deleteRowBtn = document.getElementById('deleteRowBtn');
+    const editRowBtn = document.getElementById('editRowBtn');
+    const importBtn = document.getElementById('importBtn');
+    const exportBtn = document.getElementById('exportBtn');
     const prevPageBtn = document.getElementById('prevPageBtn');
     const nextPageBtn = document.getElementById('nextPageBtn');
+    let currentEditingRow = null;
+    const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
+    let currentPage = 1;
+    const rowsPerPage = 6;
 
     function updateTablePagination() {
         const rows = Array.from(tableBody.getElementsByTagName('tr'));
@@ -136,47 +183,6 @@ $result = display_Bios(); // Calls function to retrieve the rows
         document.getElementById('searchResults').textContent = totalRows;
     }
 
-    prevPageBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            updateTablePagination();
-        }
-    });
-
-    nextPageBtn.addEventListener('click', () => {
-        const totalRows = tableBody.getElementsByTagName('tr').length;
-        const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-        if (currentPage < totalPages) {
-            currentPage++;
-            updateTablePagination();
-        }
-    });
-
-    updateTablePagination();
-
-    // --- Side Button Functionality ---
-    const addRowBtn = document.getElementById('addRowBtn');
-    const deleteRowBtn = document.getElementById('deleteRowBtn');
-    const editRowBtn = document.getElementById('editRowBtn');
-    const importBtn = document.getElementById('importBtn');
-    const exportBtn = document.getElementById('exportBtn');
-    let currentEditingRow = null;
-    const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
-
-    addRowBtn.addEventListener('click', () => {
-        const newRow = document.createElement('tr');
-        const radioCell = document.createElement('td');
-        radioCell.innerHTML = '<input type="radio" name="recordSelect">';
-        newRow.appendChild(radioCell);
-        for (let i = 0; i < columnCount; i++) {
-            const cell = document.createElement('td');
-            cell.textContent = '';
-            newRow.appendChild(cell);
-        }
-        tableBody.appendChild(newRow);
-        updateTablePagination();
-    });
-
     deleteRowBtn.addEventListener('click', () => {
         const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
         if (selectedRadio) {
@@ -186,6 +192,9 @@ $result = display_Bios(); // Calls function to retrieve the rows
                 editRowBtn.textContent = "Edit Row";
             }
             row.remove();
+            const totalRows = tableBody.getElementsByTagName('tr').length;
+            const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+            if ((currentPage - 1) * rowsPerPage >= totalRows) { currentPage = totalPages; }
             updateTablePagination();
         } else {
             alert('Please select a row to delete.');
@@ -252,6 +261,54 @@ $result = display_Bios(); // Calls function to retrieve the rows
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    });
+
+    prevPageBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            updateTablePagination();
+        }
+    });
+
+    nextPageBtn.addEventListener('click', () => {
+        const totalRows = tableBody.getElementsByTagName('tr').length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
+        if (currentPage < totalPages) {
+            currentPage++;
+            updateTablePagination();
+        }
+    });
+
+    updateTablePagination();
+
+    // Process query parameters from the Add to Database form
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(pair => {
+            const [key, value] = pair.split("=");
+            if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+        });
+        return params;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const params = getQueryParams();
+        if (params.newRecord === "1") {
+            const newRow = document.createElement("tr");
+            const radioCell = document.createElement("td");
+            radioCell.innerHTML = '<input type="radio" name="recordSelect">';
+            newRow.appendChild(radioCell);
+            const fields = ["surname", "forename", "regiment", "serviceNo", "bioAttachment"];
+            fields.forEach(field => {
+                const cell = document.createElement("td");
+                cell.textContent = params[field] || "";
+                newRow.appendChild(cell);
+            });
+            tableBody.appendChild(newRow);
+            // Clear the query string so the record is not added again on refresh
+            window.history.replaceState({}, document.title, window.location.pathname);
+            updateTablePagination();
+        }
     });
 </script>
 </body>
