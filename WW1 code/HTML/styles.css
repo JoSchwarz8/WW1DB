@@ -1,22 +1,15 @@
-/* -------------------------------------------------
-   Global Reset
---------------------------------------------------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* -------------------------------------------------
-   Login Page Background & Diagonal Overlays
---------------------------------------------------- */
 body.login-page {
   font-family: Arial, sans-serif;
   background: url("soldiersearch-thumb-845x321_LE_upscale_balanced_x2.jpg") no-repeat center center;
   background-size: cover;
-  height: 100vh;
-  width: 100%;
-  position: relative;
+  background-attachment: fixed;
+  min-height: 100vh;
   color: #000;
 }
 
@@ -31,100 +24,72 @@ body.login-page::after {
   background: rgba(255, 255, 255, 0.25);
   pointer-events: none;
 }
-
 body.login-page::before {
   clip-path: polygon(0 0, 100% 0, 50% 50%);
 }
-
 body.login-page::after {
   clip-path: polygon(0 100%, 100% 100%, 50% 50%);
 }
 
-/* -------------------------------------------------
-   Updated Top Bar Banner
---------------------------------------------------- */
 .top-bar {
   width: 100%;
-  background-color: #fff; /* White background */
+  background-color: #fff;
   padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  z-index: 2; /* Ensures it appears above overlays */
+  z-index: 2;
 }
-
 .top-bar .welcome {
-  position: static; /* Override any absolute positioning */
-  margin: 0;
   font-size: 3rem;
-  color: maroon; /* Maroon text color */
+  color: maroon;
 }
-
-.top-bar .logo {
-  position: static;
-}
-
 .top-bar .logo img {
-  max-height: 60px; /* Adjust logo size as needed */
+  max-height: 60px;
 }
 
-/* -------------------------------------------------
-   Main Container
---------------------------------------------------- */
-.container {
-  width: 100%;
-  height: 100%;
+body.login-page .container {
   position: relative;
-  z-index: 1; /* Content appears above the background overlays */
+  width: 100%;
+  height: 100vh;
 }
 
-/* -------------------------------------------------
-   Administrators Box (Left Side)
---------------------------------------------------- */
 .admin-box {
   position: absolute;
-  top: 50%;
-  left: 15%;
+  top: 36%;
+  left: 10%;
   transform: translateY(-50%);
   width: 300px;
-  background: rgba(255, 255, 255, 0.5); /* Translucent white background */
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Translucent white border */
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   padding: 20px;
   border-radius: 8px;
 }
-
 .admin-box h3 {
   font-size: 1.8rem;
   margin-bottom: 20px;
 }
-
 .admin-box form {
   display: flex;
   flex-direction: column;
 }
-
 .admin-box label {
   margin-bottom: 5px;
   font-weight: bold;
 }
-
 .admin-box input {
   margin-bottom: 15px;
   padding: 8px;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
-
-/* Error message styling */
 .error {
   color: red;
   font-style: italic;
   margin-bottom: 10px;
-  display: none; /* Hidden by default */
+  display: none;
 }
-
-/* Admin "Log In" Button */
 .admin-box button {
   padding: 10px;
   background: #A52A2A;
@@ -133,33 +98,54 @@ body.login-page::after {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .admin-box button:hover {
   background: #333;
 }
 
-/* -------------------------------------------------
-   "or" Text in the Middle
---------------------------------------------------- */
 .or {
   position: absolute;
-  top: 50%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.6rem;
   font-weight: bold;
 }
 
-/* -------------------------------------------------
-   Guest Login Box (Right Side)
---------------------------------------------------- */
 .guest-box {
   position: absolute;
-  top: 50%;
-  right: 15%;
+  top: 36%;
+  right: 10%;
   transform: translateY(-50%);
+  width: 300px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 8px;
 }
-
+.guest-box h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+.guest-box form {
+  display: flex;
+  flex-direction: column;
+}
+.guest-box label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.guest-box input {
+  margin-bottom: 15px;
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+.guest-error {
+  color: red;
+  font-style: italic;
+  margin-bottom: 10px;
+  display: none;
+}
 .guest-box button {
   padding: 10px;
   background: #A52A2A;
@@ -168,23 +154,16 @@ body.login-page::after {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .guest-box button:hover {
   background: #333;
 }
 
-/* -------------------------------------------------
-   Additional styles for table pages and search rows remain unchanged
---------------------------------------------------- */
-
-/* Table Page Styles (if used) */
 body.table-page {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #f0f0f0;
   color: #333;
   padding-bottom: 40px;
 }
-
 body.table-page .container {
   width: 90%;
   max-width: 1200px;
@@ -195,27 +174,22 @@ body.table-page .container {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
-
-/* Table styling remains unchanged */
 body.table-page table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
   background-color: #fff;
 }
-
 body.table-page thead {
   background-color: #9b111e;
   color: #fff;
 }
-
 body.table-page th,
 body.table-page td {
   border: 1px solid #ddd;
   padding: 12px 15px;
   text-align: left;
 }
-
 table thead th {
   font-size: 1.2rem;
   line-height: 1.5;
@@ -224,8 +198,6 @@ table thead th {
   white-space: nowrap;
   box-sizing: border-box;
 }
-
-/* Buttons, back-links, and search fields styling */
 body.table-page button {
   padding: 10px 20px;
   background-color: #9b111e;
@@ -234,11 +206,9 @@ body.table-page button {
   border-radius: 4px;
   cursor: pointer;
 }
-
 body.table-page button:hover {
   background-color: #7a0c17;
 }
-
 body.table-page .back-button,
 body.table-page .back-link {
   display: inline-block;
@@ -248,35 +218,27 @@ body.table-page .back-link {
   padding: 10px 20px;
   border-radius: 4px;
 }
-
 body.table-page .back-button:hover,
 body.table-page .back-link:hover {
   background-color: #7a0c17;
 }
-
-/* Flex layout for main content (if applicable) */
 .main-content {
   display: flex;
   gap: 20px;
   align-items: flex-start;
 }
-
 .table-container {
   flex: 1;
   min-width: 0;
 }
-
 .table-wrapper {
   overflow-x: auto;
 }
-
 .list-container {
   width: 220px;
   max-height: 150px;
   overflow-y: auto;
 }
-
-/* Bottom section styling (if applicable) */
 body.table-page .bottom-section {
   margin-top: 20px;
   display: flex;
@@ -284,8 +246,6 @@ body.table-page .bottom-section {
   align-items: center;
   font-size: 0.9rem;
 }
-
-/* Search Row Styles */
 .search-row {
   background-color: #999;
   padding: 20px;
@@ -295,31 +255,26 @@ body.table-page .bottom-section {
   gap: 20px;
   margin-bottom: 20px;
 }
-
 .search-row .input-group {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
 }
-
 .search-row .input-group label {
   color: #9b111e;
   font-weight: bold;
 }
-
 .search-row .input-group input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 8px 12px;
   background-color: #fff;
 }
-
 .search-row .search-buttons {
   display: flex;
   gap: 10px;
 }
-
 .search-row .search-buttons button {
   border-radius: 20px;
   padding: 8px 16px;
@@ -327,12 +282,10 @@ body.table-page .bottom-section {
   border: 2px solid #9b111e;
   cursor: pointer;
 }
-
 .search-row .search-buttons #clearFieldsBtn {
   background-color: #fff;
   color: #9b111e;
 }
-
 .search-row .search-buttons #searchBtn {
   background-color: #9b111e;
   color: #fff;
