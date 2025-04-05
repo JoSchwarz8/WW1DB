@@ -1,9 +1,0 @@
-{
-  "scripts": {
-  "start": "electron .",
-  "build": "electron-packager . WW1App --platform=win32 --arch=x64 --out=dist --overwrite"
-},
-  "devDependencies": {
-    "electron": "^25.3.1"
-  }
-}

@@ -4,8 +4,8 @@ error_reporting(E_ALL);
 ?>
 
 <?php
-require_once 'config/DBconnect.php';  // Database connection
-require_once 'config/function.php'; // Function file
+require_once 'DBconnect.php';  // Database connection
+require_once 'function.php'; // Function file
 $result = display_gwroh(); // Calls on function to fill rows
 ?>
 
@@ -90,19 +90,19 @@ $result = display_gwroh(); // Calls on function to fill rows
                             <td><?php echo $row['Battalion']; ?></td>
                             <td><?php echo $row['Company']; ?></td>
                             <td><?php echo $row['DoB']; ?></td>
-                            <td><?php echo $row['Service No.']; ?></td>
+                            <td><?php echo $row['Service no']; ?></td>
                             <td><?php echo $row['Other Regiment']; ?></td>
                             <td><?php echo $row['Other Unit']; ?></td>
-                            <td><?php echo $row['Other Service No.']; ?></td>
+                            <td><?php echo $row['Other Service no']; ?></td>
                             <td><?php echo $row['Medals']; ?></td>
-                            <td><?php echo $row['Enlistment date']; ?></td>
-                            <td><?php echo $row['Discharge date']; ?></td>
+                            <td><?php echo $row['Enlistment Date']; ?></td>
+                            <td><?php echo $row['Discharge Date']; ?></td>
                             <td><?php echo $row['Death (in service) date']; ?></td>
-                            <td><?php echo $row['Misc Info Nroh']; ?></td>
+                            <td><?php echo $row['Misc info (Nroh)']; ?></td>
                             <td><?php echo $row['Cemetery/Memorial']; ?></td>
                             <td><?php echo $row['Cemetery/Memorial Ref']; ?></td>
                             <td><?php echo $row['Cemetery/Memorial Country']; ?></td>
-                            <td><?php echo $row['Additional CWGC info']; ?></td>
+                            <td><?php echo $row['Misc info (gwgc)']; ?></td>
                         </tr>
                     <?php } ?>
                     </tbody>

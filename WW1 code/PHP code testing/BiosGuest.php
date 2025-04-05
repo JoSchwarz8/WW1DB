@@ -62,7 +62,17 @@ $result = display_Bios();        // Calls on function to fill rows
                             <td><?php echo $row['Forename']; ?></td>
                             <td><?php echo $row['Regiment']; ?></td>
                             <td><?php echo $row['Service no']; ?></td>
-                            <td><?php echo $row['Biography']; ?></td>
+                            <td>
+                                <?php
+                                // Check if there is a PDF file path saved
+                                if (!empty($row['Biography'])) {
+                                    // Display a link that opens the PDF in a new tab
+                                    echo '<a href="' . htmlspecialchars($row['Biography']) . '" target="_blank">View PDF</a>';
+                                } else {
+                                    echo 'No Attachment';
+                                }
+                                ?>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>

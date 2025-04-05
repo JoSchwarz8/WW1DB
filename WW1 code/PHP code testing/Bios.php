@@ -86,7 +86,17 @@ $result = display_Bios(); // Calls function to retrieve the rows
                             <td><?php echo $row['Forename']; ?></td>
                             <td><?php echo $row['Regiment']; ?></td>
                             <td><?php echo $row['Service no']; ?></td>
-                            <td><?php echo $row['Biography']; ?></td>
+                            <td>
+                                <?php
+                                // Check if there is a PDF file path saved
+                                if (!empty($row['Biography'])) {
+                                    // Display a link that opens the PDF in a new tab
+                                    echo '<a href="' . htmlspecialchars($row['Biography']) . '" target="_blank">View PDF</a>';
+                                } else {
+                                    echo 'No Attachment';
+                                }
+                                ?>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -201,40 +211,32 @@ $result = display_Bios(); // Calls function to retrieve the rows
         }
     });
 
+    // New edit row functionality - redirects to Update-Biographies.php with row data
     editRowBtn.addEventListener('click', () => {
         const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
         if (!selectedRadio) {
             alert('Please select a row to edit.');
             return;
         }
+        
         const row = selectedRadio.closest('tr');
-        if (currentEditingRow === row) {
-            Array.from(row.cells).forEach((cell, index) => {
-                if (index > 0) {
-                    cell.contentEditable = false;
-                    cell.style.backgroundColor = "";
-                }
-            });
-            editRowBtn.textContent = "Edit Row";
-            currentEditingRow = null;
-        } else {
-            if (currentEditingRow) {
-                Array.from(currentEditingRow.cells).forEach((cell, index) => {
-                    if (index > 0) {
-                        cell.contentEditable = false;
-                        cell.style.backgroundColor = "";
-                    }
-                });
-            }
-            Array.from(row.cells).forEach((cell, index) => {
-                if (index > 0) {
-                    cell.contentEditable = true;
-                    cell.style.backgroundColor = "#ffffe0";
-                }
-            });
-            editRowBtn.textContent = "Save Row";
-            currentEditingRow = row;
-        }
+        const surname = row.cells[1].textContent.trim();
+        const forename = row.cells[2].textContent.trim();
+        const regiment = row.cells[3].textContent.trim();
+        const serviceNo = row.cells[4].textContent.trim();
+        const bioAttachment = row.cells[5].querySelector('a') ? 
+                             row.cells[5].querySelector('a').getAttribute('href') : '';
+        
+        // Build query parameters
+        const params = new URLSearchParams();
+        params.set("surname", surname);
+        params.set("forename", forename);
+        params.set("regiment", regiment);
+        params.set("serviceNo", serviceNo);
+        params.set("bioAttachment", bioAttachment);
+        
+        // Redirect to Update-Biographies.php with the data
+        window.location.href = "Update-Biographies.php?" + params.toString();
     });
 
     importBtn.addEventListener('click', () => {
