@@ -1,9 +1,14 @@
 {
+  "name": "ww1-lockdown-app",
+  "version": "1.0.0",
+  "description": "Locked-down WW1 database system for Bradford Mechanics Library",
+  "main": "main.js",
   "scripts": {
-  "start": "electron .",
-  "build": "electron-packager . WW1App --platform=win32 --arch=x64 --out=dist --overwrite"
-},
+    "start": "electron .",
+    "build": "electron-packager . WW1App --platform=win32 --arch=x64 --out=dist --overwrite"
+  },
   "devDependencies": {
-    "electron": "^25.3.1"
+    "electron": "^25.3.1",
+    "electron-packager": "^17.1.1"
   }
 }
