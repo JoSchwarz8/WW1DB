@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add to Database - Biographies</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .form-section {
+      background-color: #999;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .form-section .input-group {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 200px;
+    }
+    .form-section label {
+      color: #9b111e;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+    .form-section input[type="text"] {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      background-color: #fff;
+      font-size: 0.9rem;
+    }
+    .form-buttons {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: flex-start;
+      margin-top: 10px;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .table-container th,
+    .table-container td {
+      border: 1px solid #ddd;
+      padding: 6px 8px;
+      white-space: nowrap;
+      font-size: 0.8rem;
+    }
+    .table-container thead {
+      background-color: #9b111e;
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="table-page">
+<div class="container">
+  <h1>Add to Database - Biographies</h1>
+  <form id="addRecordForm" class="form-section" method="post" action="AddBios.php">
+    <div class="input-group">
+      <label for="surname">Surname</label>
+      <input type="text" id="surname" name="surname" placeholder="Enter surname" required>
+    </div>
+    <div class="input-group">
+      <label for="forename">Forename</label>
+      <input type="text" id="forename" name="forename" placeholder="Enter forename" required>
+    </div>
+    <div class="input-group">
+      <label for="regiment">Regiment</label>
+      <input type="text" id="regiment" name="regiment" placeholder="Enter regiment">
+    </div>
+    <div class="input-group">
+      <label for="serviceNo">Service No</label>
+      <input type="text" id="serviceNo" name="serviceNo" placeholder="Enter service number">
+    </div>
+    <div class="input-group">
+      <label for="bioAttachment">Biography Attachment</label>
+      <input type="text" id="bioAttachment" name="bioAttachment" placeholder="Enter biography attachment">
+    </div>
+    <div class="form-buttons">
+      <button type="submit" id="submitBtn" class="btn btn-primary">Add Record</button>
+      <button type="reset" id="clearFormBtn">Clear Fields</button>
+    </div>
+  </form>
+  <div class="table-container">
+    <div class="table-wrapper">
+      <table id="recordsTable">
+        <thead>
+        <tr>
+          <th>Surname</th>
+          <th>Forename</th>
+          <th>Regiment</th>
+          <th>Service No</th>
+          <th>Biography Attachment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- New rows will be added here if desired -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="bottom-section" style="margin-top:20px;">
+    <a class="back-button" href="dashboard.html">Back</a>
+  </div>
+</div>
+</body>
+</html>
