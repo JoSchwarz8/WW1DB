@@ -172,7 +172,7 @@ deleteRowBtn.addEventListener('click', () => {
   }
 
   const row = selectedRadio.closest('tr');
-  const surname = row.cells[1].textContent.trim();  // assuming Surname is in column 2 (index 1)
+  const surname = row.cells[1].textContent.trim();
 
   fetch("delete_burial.php", {
     method: "POST",
@@ -182,14 +182,13 @@ deleteRowBtn.addEventListener('click', () => {
   .then(res => res.json())
   .then(data => {
     if (data.success) {
-      alert("Record deleted successfully.");
-      row.remove();  // remove from table
+      alert("Record deleted.");
+      row.remove(); // update table without reload
     } else {
       alert("Failed to delete: " + data.error);
     }
   });
 });
-
 
   editRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
