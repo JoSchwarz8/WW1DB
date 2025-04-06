@@ -12,12 +12,29 @@
     .scrollable-table {
       overflow-x: auto;
     }
+    .list-container {
+      width: 220px;
+    }
+    .list-container ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .list-container li {
+      margin-bottom: 15px;
+    }
+    .list-container button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body class="table-page">
 <div class="container">
   <h1>Biographies</h1>
 
+  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -33,6 +50,7 @@
     </div>
   </div>
 
+  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
     <div class="table-container">
       <div class="scrollable-table">
@@ -60,51 +78,53 @@
         </table>
       </div>
     </div>
+    <!-- Side Buttons: Only Import and Export remain -->
+    <div class="list-container">
+      <ul>
+        <li><button type="button" id="importBtn">Import</button></li>
+        <li><button type="button" id="exportBtn">Export</button></li>
+      </ul>
+    </div>
   </div>
 
+  <!-- Bottom section -->
   <div class="bottom-section">
     <div class="search-results">No of search results: <span id="searchResults">0</span></div>
     <div class="nav-buttons">
-      <!-- Added IDs for pagination buttons -->
-      <button type="button" id="prevPageBtn">&larr;</button>
-      <button type="button" id="nextPageBtn">&rarr;</button>
+      <button type="button">&larr;</button>
+      <button type="button">&rarr;</button>
     </div>
     <a class="back-button" href="dashboardGuest.html">Back</a>
   </div>
 </div>
 
-<!-- Pagination Script -->
 <script>
-  let currentPage = 1;
-  const rowsPerPage = 6;
-  const tableBody = document.querySelector('#dataTable tbody');
-  const prevPageBtn = document.getElementById('prevPageBtn');
-  const nextPageBtn = document.getElementById('nextPageBtn');
+  // Removed add, delete and edit row functionality
 
-  function updateTablePagination() {
-    const rows = Array.from(tableBody.getElementsByTagName('tr'));
-    const totalRows = rows.length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-    if (currentPage > totalPages) { currentPage = totalPages; }
-    rows.forEach((row, index) => {
-      row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
+  const importBtn = document.getElementById('importBtn');
+  const exportBtn = document.getElementById('exportBtn');
+
+  exportBtn.addEventListener('click', () => {
+    let csvContent = "";
+    const rows = document.querySelectorAll("#dataTable tr");
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll("th, td");
+      let rowData = [];
+      cells.forEach((cell) => {
+        rowData.push(cell.textContent.trim());
+      });
+      csvContent += rowData.join(",") + "\n";
     });
-    prevPageBtn.disabled = currentPage === 1;
-    nextPageBtn.disabled = currentPage === totalPages;
-    document.getElementById('searchResults').textContent = totalRows;
-  }
-
-  prevPageBtn.addEventListener('click', () => {
-    if (currentPage > 1) { currentPage--; updateTablePagination(); }
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "table_data.csv");
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   });
-
-  nextPageBtn.addEventListener('click', () => {
-    const totalRows = tableBody.getElementsByTagName('tr').length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-    if (currentPage < totalPages) { currentPage++; updateTablePagination(); }
-  });
-
-  updateTablePagination();
 </script>
 </body>
 </html>

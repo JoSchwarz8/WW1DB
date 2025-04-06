@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: dashboard.html");
             exit();
         } else {
-            echo "<h3>Login Failed. Invalid username or password. Go back to the login page and try again</h3>";
+            echo "<h3>Login Failed. Invalid username or password.</h3>";
         }
     } catch (Exception $e) {
         echo "<h3>Error: " . htmlspecialchars($e->getMessage()) . "</h3>";

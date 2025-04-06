@@ -5,18 +5,56 @@
   <title>Bradford Memorials</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .table-container { flex: 1; min-width: 0; }
-    .scrollable-table { overflow-x: auto; }
-    .list-container { width: 220px; }
-    .list-container ul { list-style: none; padding: 0; margin: 0; }
-    .list-container li { margin-bottom: 15px; }
-    .list-container button { width: 100%; padding: 10px; font-size: 1rem; }
-    .nav-buttons button { padding: 5px 10px; font-size: 1rem; }
+    /* Page-specific styles: */
+
+    /* .main-content is set to display flex in your styles.css,
+       but confirm you have something like:
+       .main-content {
+         display: flex;
+         gap: 20px;
+         align-items: flex-start;
+       }
+    */
+
+    /* Let the table-container flex to fill available space */
+    .table-container {
+      /* Remove margin: 0 auto if it was centering the table.
+         If you want the table narrower or wider, you can set a width or max-width here. */
+      flex: 1;
+      min-width: 0; /* allows the table to shrink if needed */
+    }
+
+    .scrollable-table {
+      overflow-x: auto; /* horizontal scroll if needed */
+    }
+
+    /* Keep the list-container at a fixed width (or adjust as needed). */
+    .list-container {
+      width: 220px;
+    }
+
+    /* The side buttons styling */
+    .list-container ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .list-container li {
+      margin-bottom: 15px;
+    }
+    .list-container button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body class="table-page">
 <div class="container">
+  <!-- Heading remains the same -->
   <h1>Bradford Memorials</h1>
+
+  <!-- Search Row -->
   <div class="search-row">
     <div class="input-group">
       <label for="forename">Forename:</label>
@@ -31,7 +69,10 @@
       <button type="button">Search</button>
     </div>
   </div>
+
+  <!-- Main Content: Table and Side Buttons -->
   <div class="main-content">
+    <!-- Table Container -->
     <div class="table-container">
       <div class="scrollable-table">
         <table id="dataTable">
@@ -53,18 +94,26 @@
           <tbody>
           <tr>
             <td><input type="radio" name="recordSelect"></td>
-            <!-- Empty row cells -->
-            <td></td><td></td><td></td><td></td><td></td>
-            <td></td><td></td><td></td><td></td><td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <!-- Side buttons -->
+
+    <!-- Side Buttons -->
     <div class="list-container">
       <ul>
-        <li><button type="button" id="addRowBtn" onclick="window.location.href='Add to Database - Bradford Memorials.html'">Add Row</button></li>
+        <li><button type="button" id="addRowBtn">Add Row</button></li>
         <li><button type="button" id="deleteRowBtn">Delete Row</button></li>
         <li><button type="button" id="editRowBtn">Edit Row</button></li>
         <li><button type="button" id="importBtn">Import</button></li>
@@ -72,39 +121,44 @@
       </ul>
     </div>
   </div>
+
+  <!-- Bottom Section -->
   <div class="bottom-section">
-    <div class="search-results">No of search results: <span id="searchResults">0</span></div>
+    <div class="search-results">
+      No of search results: <span id="searchResults">0</span>
+    </div>
     <div class="nav-buttons">
-      <button type="button" id="prevPageBtn">&larr;</button>
-      <button type="button" id="nextPageBtn">&rarr;</button>
+      <button type="button">&larr;</button>
+      <button type="button">&rarr;</button>
     </div>
     <a class="back-button" href="dashboard.html">Back</a>
   </div>
 </div>
+
 <script>
-  // Side button functionality
+  // JavaScript functionality remains exactly the same
+
   const tableBody = document.querySelector('#dataTable tbody');
+  const addRowBtn = document.getElementById('addRowBtn');
   const deleteRowBtn = document.getElementById('deleteRowBtn');
   const editRowBtn = document.getElementById('editRowBtn');
   const importBtn = document.getElementById('importBtn');
   const exportBtn = document.getElementById('exportBtn');
   let currentEditingRow = null;
   const columnCount = document.querySelectorAll("#dataTable thead th").length - 1;
-  let currentPage = 1;
-  const rowsPerPage = 6;
 
-  function updateTablePagination() {
-    const rows = Array.from(tableBody.getElementsByTagName('tr'));
-    const totalRows = rows.length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-    if (currentPage > totalPages) currentPage = totalPages;
-    rows.forEach((row, index) => {
-      row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
-    });
-    document.getElementById('searchResults').textContent = totalRows;
-    document.getElementById('prevPageBtn').disabled = currentPage === 1;
-    document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
-  }
+  addRowBtn.addEventListener('click', () => {
+    const newRow = document.createElement('tr');
+    const radioCell = document.createElement('td');
+    radioCell.innerHTML = '<input type="radio" name="recordSelect">';
+    newRow.appendChild(radioCell);
+    for (let i = 0; i < columnCount; i++) {
+      const cell = document.createElement('td');
+      cell.textContent = '';
+      newRow.appendChild(cell);
+    }
+    tableBody.appendChild(newRow);
+  });
 
   deleteRowBtn.addEventListener('click', () => {
     const selectedRadio = document.querySelector('input[type="radio"][name="recordSelect"]:checked');
@@ -115,7 +169,6 @@
         editRowBtn.textContent = "Edit Row";
       }
       row.remove();
-      updateTablePagination();
     } else {
       alert('Please select a row to delete.');
     }
@@ -129,6 +182,7 @@
     }
     const row = selectedRadio.closest('tr');
     if (currentEditingRow === row) {
+      // Finish editing
       Array.from(row.cells).forEach((cell, index) => {
         if (index > 0) {
           cell.contentEditable = false;
@@ -138,6 +192,7 @@
       editRowBtn.textContent = "Edit Row";
       currentEditingRow = null;
     } else {
+      // Start editing a new row
       if (currentEditingRow) {
         Array.from(currentEditingRow.cells).forEach((cell, index) => {
           if (index > 0) {
@@ -183,47 +238,20 @@
     document.body.removeChild(link);
   });
 
-  document.getElementById('prevPageBtn').addEventListener('click', () => {
-    if (currentPage > 1) { currentPage--; updateTablePagination(); }
+  // Clear fields functionality
+  const clearFieldsBtn = document.getElementById('clearFieldsBtn');
+  const searchBtn = document.getElementById('searchBtn');
+  const forenameInput = document.getElementById('forename');
+  const surnameInput = document.getElementById('surname');
+
+  clearFieldsBtn.addEventListener('click', () => {
+    forenameInput.value = "";
+    surnameInput.value = "";
   });
 
-  document.getElementById('nextPageBtn').addEventListener('click', () => {
-    const totalRows = tableBody.getElementsByTagName('tr').length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage) || 1;
-    if (currentPage < totalPages) { currentPage++; updateTablePagination(); }
-  });
-
-  updateTablePagination();
-
-  // Process query parameters and add new row if present.
-  function getQueryParams() {
-    const params = {};
-    window.location.search.substring(1).split("&").forEach(pair => {
-      const [key, value] = pair.split("=");
-      if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
-    });
-    return params;
-  }
-  window.addEventListener("DOMContentLoaded", () => {
-    const params = getQueryParams();
-    if (params.newRecord === "1") {
-      const newRow = document.createElement('tr');
-      const radioCell = document.createElement('td');
-      radioCell.innerHTML = '<input type="radio" name="recordSelect">';
-      newRow.appendChild(radioCell);
-      // Expected fields: surname, forename, rank, address, regiment, unit, articleComment, newspaperName, newspaperDate, pageCol, photoIncl.
-      const fields = ["surname", "forename", "regiment", "serviceNo", "bioAttachment"];
-      // For BradMem.html, we expect fields for Biographies; if this page is used solely for displaying new record for Bradford Memorials, adjust accordingly.
-      // Here, we assume the query parameters match the fields for the Biographies table (as your setup might be similar).
-      fields.forEach(field => {
-        const cell = document.createElement('td');
-        cell.textContent = params[field] || "";
-        newRow.appendChild(cell);
-      });
-      tableBody.appendChild(newRow);
-      window.history.replaceState({}, document.title, window.location.pathname);
-      updateTablePagination();
-    }
+  searchBtn.addEventListener('click', () => {
+    alert('Search not implemented. Forename: ' + forenameInput.value +
+            ' | Surname: ' + surnameInput.value);
   });
 </script>
 </body>
