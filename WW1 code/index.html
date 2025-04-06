@@ -7,14 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="login-page">
-<!-- Top-left welcome text -->
-<!-- Changed from <h1 class="welcome"> to keep the same class but also ensure it's a heading -->
-<h1 class="welcome">Welcome</h1>
 
-<!-- Top-right logo/title -->
-<div class="logo">
-  <!-- Replace the old text-based heading with your new PNG logo -->
-  <img src="BradWW1GroupLogo.png" alt="Bradford WWI Group Logo">
+<!-- NEW Top Banner -->
+<div class="top-bar">
+  <h1 class="welcome">Welcome</h1>
+  <div class="logo">
+    <img src="BradWW1GroupLogo.png" alt="Bradford WWI Group Logo">
+  
+  <!-- Styled Exit button below login section -->
+  <div class="guest-box" style="top: 65%;">
+    <button id="exitAppBtn" type="button">Exit Application</button>
+  </div>
+</div>
 </div>
 
 <!-- Main container for login boxes -->
@@ -41,7 +45,7 @@
 
   <!-- Guest login box -->
   <div class="guest-box">
-    <button type="button">Log in as Guest</button>
+    <button type="button" onclick="window.location.href='dashboardGuest.html'">Log in as Guest</button>
   </div>
 </div>
 
@@ -55,19 +59,38 @@
 
     // Get the value of the password field
     const password = document.getElementById('password').value;
-
-    // Define your correct password (for demonstration: "secret")
     const correctPassword = 'secret';
 
-    // Check if password is empty or incorrect
     if (!password || password !== correctPassword) {
       errorMsg.style.display = 'block'; // Show the error message
     } else {
       errorMsg.style.display = 'none'; // Hide the error message if correct
-      // Continue with login actions, e.g., redirect to the dashboard
+      // Redirect to the dashboard
       window.location.href = "dashboard.html";
     }
   });
 </script>
+<!-- Exit Button Script for Electron -->
+
+
+
+
+
+<div class="guest-box" style="top: 65%;">
+  <button id="exitAppBtn" class="styled-button">Exit Application</button>
+</div>
+
+<script>
+  const exitBtn = document.getElementById("exitAppBtn");
+
+  if (exitBtn && window.electronAPI) {
+    exitBtn.addEventListener("click", () => {
+      window.electronAPI.exitApp(); // 💣 This will quit the app entirely
+    });
+  }
+</script>
+
+
 </body>
+
 </html>
