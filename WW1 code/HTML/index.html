@@ -3,90 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <title>Bradford WWI Group Login</title>
-  <!-- Link to the updated stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="login-page">
-
-<!-- NEW Top Banner -->
 <div class="top-bar">
   <h1 class="welcome">Welcome</h1>
   <div class="logo">
     <img src="BradWW1GroupLogo.png" alt="Bradford WWI Group Logo">
-  
-  <!-- Styled Exit button below login section -->
-  <div class="guest-box" style="top: 65%;">
-    <button id="exitAppBtn" type="button">Exit Application</button>
   </div>
 </div>
-</div>
 
-<!-- Main container for login boxes -->
 <div class="container">
-  <!-- Administrators login box -->
   <div class="admin-box">
     <h3>Administrators</h3>
     <form id="loginForm">
       <label for="username">Username</label>
       <input type="text" id="username" placeholder="Username" required>
-
       <label for="password">Password</label>
       <input type="password" id="password" placeholder="Password" required>
-
-      <!-- The error message is hidden by default -->
-      <p class="error">Incorrect password, please try again</p>
-
+      <p class="error">Incorrect password or password does not meet complexity requirements.</p>
       <button type="submit">Log In</button>
     </form>
   </div>
 
-  <!-- The "or" text in the middle -->
   <div class="or">or</div>
 
-  <!-- Guest login box -->
   <div class="guest-box">
-    <button type="button" onclick="window.location.href='dashboardGuest.html'">Log in as Guest</button>
+    <h3>Guest Login</h3>
+    <form id="guestLoginForm">
+      <label for="guestPassword">Password</label>
+      <input type="password" id="guestPassword" placeholder="Password" required>
+      <p class="guest-error">Incorrect password or password does not meet complexity requirements.</p>
+      <button type="submit">Log In as Guest</button>
+    </form>
   </div>
 </div>
 
-<!-- JavaScript for form validation -->
 <script>
+  // Checks if password is at least 8 characters and contains a special character.
+  function isComplex(password) {
+    return password.length >= 8 && /[^A-Za-z0-9]/.test(password);
+  }
+
   const form = document.getElementById('loginForm');
   const errorMsg = document.querySelector('.error');
-
+  // Updated correct password meets the criteria: at least 8 chars with a special character.
+  const correctPassword = 'secret@123';
   form.addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent form from submitting by default
-
-    // Get the value of the password field
+    e.preventDefault();
     const password = document.getElementById('password').value;
-    const correctPassword = 'secret';
-
-    if (!password || password !== correctPassword) {
-      errorMsg.style.display = 'block'; // Show the error message
+    if (!isComplex(password) || password !== correctPassword) {
+      errorMsg.style.display = 'block';
     } else {
-      errorMsg.style.display = 'none'; // Hide the error message if correct
-      // Redirect to the dashboard
+      errorMsg.style.display = 'none';
       window.location.href = "dashboard.html";
     }
   });
+
+  const guestForm = document.getElementById('guestLoginForm');
+  const guestError = document.querySelector('.guest-error');
+  // Updated guest password meets the criteria.
+  const correctGuestPassword = 'guest@123';
+  guestForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const guestPassword = document.getElementById('guestPassword').value;
+    if (!isComplex(guestPassword) || guestPassword !== correctGuestPassword) {
+      guestError.style.display = 'block';
+    } else {
+      guestError.style.display = 'none';
+      window.location.href = "dashboardGuest.html";
+    }
+  });
 </script>
-<!-- Exit Button Script for Electron -->
-
-
-
-
-
-<script>
-  const exitBtn = document.getElementById("exitAppBtn");
-  if (exitBtn) {
-    exitBtn.addEventListener("click", () => {
-      if (window.electronAPI && typeof window.electronAPI.exitApp === 'function') {
-        window.electronAPI.exitApp();
-      }
-    });
-  }
-</script>
-
 </body>
-
 </html>
