@@ -7,12 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-if (!isset($data['service_number'])) {
-    echo json_encode(["success" => false, "error" => "Missing service_number"]);
+if (!isset($data['memorial_id'])) {
+    echo json_encode(["success" => false, "error" => "Missing memorial_id"]);
     exit;
 }
 
-$serviceNumber = $data['service_number'];
+$memorialId = $data['memorial_id'];
 
 $conn = new mysqli("localhost", "root", "", "ww1-2");
 if ($conn->connect_error) {
@@ -20,8 +20,8 @@ if ($conn->connect_error) {
     exit;
 }
 
-$stmt = $conn->prepare("DELETE FROM burials WHERE `Service Number` = ?");
-$stmt->bind_param("s", $serviceNumber);
+$stmt = $conn->prepare("DELETE FROM memorials WHERE `Memorial_ID` = ?");
+$stmt->bind_param("i", $memorialId);
 $success = $stmt->execute();
 
 echo json_encode(["success" => $success]);

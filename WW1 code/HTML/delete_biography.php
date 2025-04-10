@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-$stmt = $conn->prepare("DELETE FROM burials WHERE `Service Number` = ?");
+$stmt = $conn->prepare("DELETE FROM biographies WHERE `Service No` = ?");
 $stmt->bind_param("s", $serviceNumber);
 $success = $stmt->execute();
 
