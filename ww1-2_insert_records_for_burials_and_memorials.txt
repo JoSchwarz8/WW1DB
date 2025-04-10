@@ -1,0 +1,253 @@
+
+
+-- BURIALS --
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Ackrel', 'William Frank', '34', 'Not recorded', '1919-04-12',
+'Driver', 'T/341931', 'Royal Army Service Corps', 'Not Known', 'Undercliffe Cemetery',
+'Section E. Grave 458 (Unconsecrated)', 'Born in Beswick, Manchester, the son of William and Mary Ackrel of 37, Airedale Crescent, Bradford and the husband of Lily Ackrel (nee Brayshaw) whom he married in 1909. They lived at  46, Lonsdale Road, Bradford. He had previously volunteered to join the Army but had been rejected as medically unfit. However in February 1918 he was allowed to join the Army and after training he was sent to Ireland where he was engaged with the horse transport of his unit. Whilst in the service of his country he caught broncho - pnuemonia from which he died. Prior to his enlistment he was employed as a Tram Conductor. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Ackroyd', 'Fred Stowell', '32', 'Not recorded', '1918-11-28',
+'Corporal', '233608', 'Royal Air Force', 'Calshot (Hants).', 'Bowling Cemetery',
+'Section V, Grave 167 (Consecrated)', 'Born in Little Horton, Bradford, the son of Rowland and Eliza Ackroyd and the husband of Annie Ackroyd (nee Metcalfe) whom he married in 1908.. Both his parents died when he was young and in 1901 he was placed into the Nutter Orphanage in Great Horton, Bradford. He joined the RAF in 1917 before which he was employed as a Clerk. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Ackroyd', 'Samuel', '44', 'Not recorded', '1916-07-27',
+'Corporal', '72225', 'Royal Engineers', 'Not Known', 'Scholemoor Cemetery',
+'Section B, Grave 492 (Consecrated)', 'The son of James and Agnes Ackroyd and the husband of Elizabeth Ackroyd (nee Doolam) whom he married in 1895 in Bradford. They lived at 21, Jermyn Street, Church Bank, Bradford. He died in the War Hospital, Thornton. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Allan', 'John Edward', '28', 'Not recorded', '1919-03-08',
+'Air Mechanic 2nd Class', '23994', 'Royal Air Force', 'Not Known', 'Bowling Cemetery',
+'Section X, Grave 1474 (Consecrated)', 'Born in York the son of the John William and Sarah Allan. He joined the RAF in February 1916 and in March 1918 he was discharged as unfit for duties after contracting Tuberculosis, from which he died of in the Seacroft Military Hospital, Leeds. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Ambler', 'George', '23', 'Not recorded', '1917-08-03',
+'Second Lieutenant', 'None', 'West Yorkshire Regiment  (Prince of Wales's Own)', 'Not Known', 'Undercliffe Cemetery',
+'Section H, Grave 796 (Consecrated)', 'The son of the late John and his second wife Edith Alice Ambler of Heaton Mount, Bradford. He joined the Army in 1915 and was promoted to Lieutenant in January 1917. He was wounded in the arm at Beaumont Hamel in early May 1917 and when he recovered he rejoined his unit in late May 1917. At the battle of Loos, in July 1917, he was again wounded and died of these wounds at the 3rd London General Hospital, Wandsworth Common, London. He is interned in a Family Grave with his name commemorated on the side.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Amyes', 'Thomas', '37', 'Not recorded', '1919-08-29',
+'Lance Corporal', '29102', 'Royal Field Artillery', '35th Brigade', 'Bowling Cemetery',
+'Section X, Grave 952 (Consecrated)', 'The son of Henry and Mary Amyes and the husband of Marian Walton Amyes (nee Hill), of 14, Gibson Street, Leeds Road, Bradford whom he married in 1914. He had previously enlisted into the Army in 1898 and was on reserve when he was called up in 1914. He was discharged in August 1918 as medically unfit due to sickness from which he died at his home. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Andrews', 'George', '24', 'Not recorded', '1920-02-01',
+'Private', 'M/40125', 'Royal Army Service Corps', 'Motor Transport', 'Bowling Cemetery',
+'Section U, Grave 590 (Consecrated)', 'The son of William and Rosina Andrews. He lived at 103, St Stephens Road, Bowling  having previously lived at 213, Rooley Lane and 41, Dalcross Street. Prior to his enlistment he was employed as a Cloth Roller. He died at the Royal Victoria Hospital. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Anness', 'Walter', '38', 'Not recorded', '1918-07-07',
+'Private', '20134', 'Suffolk Regiment', '9th Battalion', 'Scholemoor Cemetery',
+'Section 3, Grave 2084 (Consecrated)', 'Born in Epsworth, Lincolnshire to William and Alice Ada Anness. Prior to his enlistment he was living in Thetford , Norfolk and was employed as a farm labourer. He was living with his sister at 39, Burnley Road, Colne whilst recovering from Broncial Pneumonia from which he died at the St Lukes War Hospital, Bradford. His grave has a Commonwealth War Grave Headstone and he shares his final resting place with seven other fallen soldiers.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Armitage', 'Harry', '26', 'Not recorded', '1916-07-28',
+'Sapper', '22987', 'Royal Engineers', '54th Field Company', 'Bowling Cemetery',
+'Section T, Grave 166 (Unconsecrated)', 'The son of Mathew and Ann Armitage and the husband of Eva Armitage. He lived at 22, Montague Street having previously lived in Southfield Lane and Quaker Lane. His civilian occupation had been that of a Boiler Maker. After being wounded in action he was transferred to the Royal Infirmary in Dundee where he died of his wounds. His wife Eva, after the death of her husband, emigrated to the USA and set up home at 273 School Street, North Dighton, Mass. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Atkinson', 'Arthur', '19', 'Not recorded', '1918-07-14',
+'Private', '66309', 'Northumberland Fusiliers', 'Depot Battalion', 'Buttershaw (St Pauls) Churchyard',
+'South West part', 'The son of William and Pricilla Atkinson of 46, Fair Road, Wibsey, Bradford. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Attwell', 'H', '35', 'Not recorded', '1917-12-28',
+'Gunner', '31440', 'Royal Field Artillery', '2nd Reserve Brigade', 'Bowling Cemetery',
+'Section X, Grave 412 (Consecrated)', 'The son of Charles and Emma Attwell. He lived at 45, Clayton Lane and he died in the St Lukes War Hospital. His grave has a Commonwealth War Grave Headstone and he shares his final resting place with another fallen soldier.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Aveyard', 'Harry', '20', 'Not recorded', '1918-11-06',
+'Rifleman', '251860', 'Prince of Wales's Own (West Yorkshire Regiment)', '2nd/7th Battalion', 'Scholemoor Cemetery',
+'Section 3, Grave 1635 (Unconsecrated)', 'The son of John and Mary Aveyard, they lived at 55, Cottam Terrace, Legram''s Lane, Bradford. He died at the Finner Camp in Ireland and is interned in a Family Grave.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Bairstow', 'John William', '31', 'Not recorded', '1919-03-31',
+'Private', '9292', 'Black Watch (Royal Highlanders)', '2nd Battalion', 'Undercliffe Cemetery',
+'Section A, Grave 684 (Consecrated)', 'Born in Overdon, Halifax, the son of the late Wright Bairstow and Margaret Bairstow of 14, Fernbank Road, Undercliffe, Bradford. He had served 16 years'' service in the armed forces and he died  in the War Hospital in Perth, Scotland. He is interned in a Family Grave.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Bairstow', 'John William', '29', 'Not recorded', '1918-10-23',
+'Driver', 'T/308032', 'Army Service Corps', 'No.2 Section,  4th Cav. Reserve Park', 'Bowling Cemetery',
+'Section D, Grave 305 (Unconsecrated)', 'The son of William Henry and Alice Bairstow and the husband of Jane Bairstow (nee Whittaker) whom he married in 1914. They lived at 25, Seymour Street, Leeds Road, Bradford. Whilst home on two weeks leave he died in St Lukes War Hospital, Bradford, of Influenza and Pneumonia. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Ball', 'Percy', '20', 'Not recorded', '1916-03-09',
+'Private', '17961', 'Duke of Wellingtons (West Riding Regiment)', '11th Battalion', 'Clayton Heights Methodist Church Yard',
+'In South West Part, Grave 1971', 'The son of Samuel Harry and Agnes Ball. He lived with his parents at 886, Great Horton Road, Bradford, having  previously lived at 28, Pickles Lane,Great Horton. He enlisted in November 1915 and a few months later he contracted Sinal Meningitis from which he died. Prior to his enlistment he was employed as a Pattern Cutter. He is interned in a Family Grave.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Bank', 'Albert', '19', 'Not recorded', '1916-10-03',
+'Private', '5644', 'Duke of Wellington's  (West Riding Regiment)', '1st/6th Battalion', 'Scholemoor Cemetery',
+'Section L, Grave 69 (Consecrated)', 'The son of John William and Francis Alice Bank. He lived at the Sportsman Inn, Clayton, where his father was the landlord. They had previously lived at 307,Clayton Road, Lidget Green. He died in the Royal Eye and Ear Hospital, Bradford from Thrombosis resulting from a operation on his ear. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Banks', 'Robert', '25', 'Not recorded', '1917-09-26',
+'Private', '240368', 'Seaforth Highlanders', '5th Battalion', 'Scholemoor Cemetery',
+'Section 3, Grave 2072 (Unconsecrated)', 'He lived at West Dunnet, Thursoe, Scotland and he died in St Lukes War Hospital, Bradford. His grave has a Commonwealth War Grave Headstone and he shares his final resting place with another fallen soldier.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Barker', 'William', '26', 'Not recorded', '1918-10-30',
+'Private', 'SE/33094', 'Army Veterinary Corps', 'Division Veterinary Hospital (St. Albans)', 'Scholemoor Cemetery',
+'Section B, Grave 339 (Unconsecrated)', 'The son of Thomas and Sarah Barker. He lived at 2, Clayton Street having previously lived at 32,Westgrove Street and 48,Dyson Street. Prior to his enlistment he was employed as a Mill Hand. He died in the Napsbury War Hospital, St Albans. His grave has a Commonwealth War Grave Headstone and he shares his final resting place with another fallen soldier.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Barraclough', 'Fred', '26', 'Not recorded', '1916-07-08',
+'Private', '27445', 'Yorkshire Regiment', '10th Battalion.', 'Undercliffe Cemetery',
+'Section A, Grave 63 (Consecrated)', 'The son of George and Priscilla Barraclough of 25,Fitzroy Road, Bradford having previously lived in Barkerend Road, Bradford. He died at the University War Hospital, Southampton of wounds that he received in battle. Prior to his enlistment he was employed as a Warehouseman. His grave has a Commonwealth War Grave Headstone.');
+
+INSERT INTO `burials`
+(`Surname`, `Forename`, `DoB`, `Medals`, `Date of Death`, `Rank`, `Service Number`, `Regiment`, `Battalion`, `Cemetery`, `Grave Reference`, `Info`)
+VALUES (
+'Barraclough', 'Isaac', '34', 'Not recorded', '1918-10-05',
+'Acting Bombardier', '26590', 'Royal Field Artillery', '415th Battery', 'Bowling Cemetery',
+'Section G, Grave 441 (Consecrated)', 'The son of Joshua and Lindsay Barraclough. He lived at Layton Cottage, Rawdon having previously lived at 55, Bramley Street, Little Horton and also in Cotewall Street, Bowling, Bradford. Prior to enlisting he had been employed as a Dyers Labourer. He died at the Fargo Hospital, Salisbury. His grave has a Commonwealth War Grave Headstone.');
+
+-- MEMORIALS --
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Airey', 'Harry', 'West Yorkshire Regiment', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside Memorial Chapel', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Airey', 'Harry', 'West Yorkshire Regiment', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside Memorial Chapel', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Allen', 'John W', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Baines', 'Arthur', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Bannister', 'John W', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Bannister', 'John W', 'West Yorkshire Regiment', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside Memorial Chapel', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Barber', 'Alfred', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Barber', 'Alfred', 'York and Lancs', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside Memorial Chapel', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Bell', 'Edward', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Bell', 'Edward', 'West Yorkshire Regiment', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside Memorial Chapel', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Bendig', 'William', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Bendig', 'William', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside (from Bramley Street Mission Church)', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Bendig', 'Willie', 'West Yorkshire Regiment', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Inside Memorial Chapel', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `MemorialLocation`, `MemorialInfo`, `MemorialPostcode`, `District`, `PhotoAvailable`)
+VALUES (
+'Bennett', 'Harry', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Bentley', 'Joseph E', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Bingham', 'Charles', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Binns', 'Charles', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
+
+INSERT INTO `memorials`
+(`Surname`, `Forename`, `Regiment`, `Battalion`, `Memorial`, `Memorial Location`, `Memorial Info`, `Postcode`, `District`, `Photo_Available`)
+VALUES (
+'Bird', 'Albert H', 'Not recorded', 'Not recorded', 'All Saints Church, Little Horton',
+'Little Horton Green, Little Horton', 'Large Plaque inside church', 'BD5 0NG', 'Little Horton', 'No');
