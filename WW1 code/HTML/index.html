@@ -90,5 +90,18 @@
 <!--    }-->
 <!--  });-->
 <!--</script>-->
+<script>
+  const exitBtn = document.getElementById("exitAppBtn");
+
+  exitBtn?.addEventListener("click", () => {
+    // Only works in Electron context
+    if (window && window.electronAPI) {
+      window.electronAPI.exitApp();
+    } else {
+      alert("Exit only works inside the desktop app.");
+    }
+  });
+</script>
+
 </body>
 </html>
